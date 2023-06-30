@@ -1,0 +1,372 @@
+package ihm;
+
+import java.awt.BorderLayout;
+
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.MediaPrintableArea;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Toolkit;
+import javax.swing.border.TitledBorder;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.JButton;
+import java.awt.Dimension;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.FlowLayout;
+import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
+import javax.swing.JEditorPane;
+
+import metier.EasyGec;
+
+import outils.AuScore;
+import outils.EnLigne;
+import outils.TimeManager;
+
+import to.Circuit;
+import to.ResultatPuce;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.print.PageFormat;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.io.File;
+import java.io.IOException;
+import java.util.Vector;
+
+public class IhmResultatPuce extends JDialog
+{
+
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 8959944820685395136L;
+  private IhmEasyGec ihm;
+  private ResultatPuce rp;
+  private JPanel contentPane;
+  private JTextField textFieldIdentifiant;
+  private JComboBox<Circuit> comboBoxCircuits;
+  private Vector<Integer> resultatsPuce = new Vector<Integer>();
+  private JEditorPane editorPane;
+  private JButton btnOk;
+  private JButton btnReload;
+
+
+  /**
+   * Create the frame.
+   */
+  public IhmResultatPuce(final IhmEasyGec ihm, final ResultatPuce rp)
+  {
+    setModal(true);
+    setResizable(false);
+    setTitle(EasyGec.getLangages().getText("90", EasyGec.getLang()));
+    setIconImage(Toolkit.getDefaultToolkit().getImage(IhmResultatPuce.class.getResource("/icones/easy.png")));
+    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    setBounds(100, 100, 327, 542);
+    contentPane = new JPanel();
+    contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+    contentPane.setLayout(new BorderLayout(0, 0));
+    setContentPane(contentPane);
+    
+    JPanel panel = new JPanel();
+    panel.setPreferredSize(new Dimension(60, 10));
+    panel.setBorder(new TitledBorder(null, EasyGec.getLangages().getText("104", EasyGec.getLang()), TitledBorder.LEADING, TitledBorder.TOP, null, null));
+    contentPane.add(panel, BorderLayout.EAST);
+    
+    btnOk = new JButton("");
+    btnOk.addActionListener(new ActionListener() 
+    {
+      public void actionPerformed(ActionEvent arg0) 
+      {
+        if(comboBoxCircuits.getSelectedIndex()>-1)
+        {
+          addResultatPuce();
+          ihm.btnEnregistrer.doClick();
+          dispose();
+        }
+      }
+    });
+    btnOk.setIcon(new ImageIcon(IhmResultatPuce.class.getResource("/icones/ok64.png")));
+    btnOk.setPreferredSize(new Dimension(48, 48));
+    btnOk.setToolTipText(EasyGec.getLangages().getText("91", EasyGec.getLang()));
+    panel.add(btnOk);
+    
+    JButton btnOkPrint = new JButton("");
+    btnOkPrint.addActionListener(new ActionListener() 
+    {
+      public void actionPerformed(ActionEvent arg0) 
+      {
+        if(comboBoxCircuits.getSelectedIndex()>-1)
+        {
+          addResultatPuce();
+          ihm.btnEnregistrer.doClick();
+          printResultat();
+          dispose();
+        }
+      }
+    });
+    btnOkPrint.setPreferredSize(new Dimension(48, 48));
+    btnOkPrint.setToolTipText(EasyGec.getLangages().getText("92", EasyGec.getLang()));
+    btnOkPrint.setIcon(new ImageIcon(IhmResultatPuce.class.getResource("/icones/okPrint.png")));
+    panel.add(btnOkPrint);
+    
+    JButton btnPrint = new JButton("");
+    btnPrint.addActionListener(new ActionListener() 
+    {
+      public void actionPerformed(ActionEvent arg0) 
+      {
+        if(comboBoxCircuits.getSelectedIndex()>-1)
+        {
+          printResultat();
+        }
+      }
+    });
+    btnPrint.setIcon(new ImageIcon(IhmResultatPuce.class.getResource("/icones/print.png")));
+    btnPrint.setToolTipText(EasyGec.getLangages().getText("93", EasyGec.getLang()));
+    btnPrint.setPreferredSize(new Dimension(48, 48));
+    panel.add(btnPrint);
+    
+    JButton btnAnnuler = new JButton("");
+    btnAnnuler.addActionListener(new ActionListener() 
+    {
+      public void actionPerformed(ActionEvent arg0) 
+      {
+        dispose();
+      }
+    });
+    btnAnnuler.setToolTipText(EasyGec.getLangages().getText("94", EasyGec.getLang()));
+    btnAnnuler.setPreferredSize(new Dimension(48, 48));
+    btnAnnuler.setIcon(new ImageIcon(IhmResultatPuce.class.getResource("/icones/back.png")));
+    panel.add(btnAnnuler);
+    
+    JPanel panel_1 = new JPanel();
+    FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
+    flowLayout.setAlignment(FlowLayout.LEFT);
+    panel_1.setBorder(new TitledBorder(null, EasyGec.getLangages().getText("95", EasyGec.getLang()), TitledBorder.LEADING, TitledBorder.TOP, null, null));
+    contentPane.add(panel_1, BorderLayout.CENTER);
+    
+    JPanel panel_2 = new JPanel();
+    panel_1.add(panel_2);
+    
+    JLabel lblIdentifiant = new JLabel(EasyGec.getLangages().getText("96", EasyGec.getLang()));
+    panel_2.add(lblIdentifiant);
+    
+    textFieldIdentifiant = new JTextField();
+    textFieldIdentifiant.setMinimumSize(new Dimension(150, 20));
+    textFieldIdentifiant.setPreferredSize(new Dimension(150, 20));
+    panel_2.add(textFieldIdentifiant);
+    textFieldIdentifiant.setColumns(18);
+    
+    JPanel panel_3 = new JPanel();
+    panel_1.add(panel_3);
+    
+    JLabel lblCircuit = new JLabel(EasyGec.getLangages().getText("97", EasyGec.getLang()));
+    panel_3.add(lblCircuit);
+    
+    comboBoxCircuits = new JComboBox<Circuit>();
+    comboBoxCircuits.addActionListener(new ActionListener() 
+    {
+      public void actionPerformed(ActionEvent arg0) 
+      {
+        if(comboBoxCircuits.getSelectedIndex()>-1)
+        {
+          rp.setCircuit((Circuit) comboBoxCircuits.getSelectedItem());
+          rp.setIdentifiant(textFieldIdentifiant.getText());
+          rp.setDatas(ihm.easyGec.getOrienteurs().getDatas(textFieldIdentifiant.getText()));
+          rp.saveHtml();
+          reLoadPage();
+        }
+      }
+    });
+    comboBoxCircuits.setPreferredSize(new Dimension(175, 20));
+    panel_3.add(comboBoxCircuits);
+    
+    JPanel panel_4 = new JPanel();
+    FlowLayout flowLayout_1 = (FlowLayout) panel_4.getLayout();
+    flowLayout_1.setAlignment(FlowLayout.LEFT);
+    panel_4.setPreferredSize(new Dimension(230, 400));
+    panel_1.add(panel_4);
+    
+    btnReload = new JButton("");
+    btnReload.addActionListener(new ActionListener() 
+    {
+      public void actionPerformed(ActionEvent arg0) 
+      {
+        if(comboBoxCircuits.getSelectedIndex()>-1)
+        {
+          reLoadPage();
+        }
+      }
+    });
+    panel_4.add(btnReload);
+    btnReload.setToolTipText(EasyGec.getLangages().getText("98", EasyGec.getLang()));
+    btnReload.setPreferredSize(new Dimension(32, 32));
+    btnReload.setIcon(new ImageIcon(IhmResultatPuce.class.getResource("/icones/reload.png")));
+    
+    editorPane = new JEditorPane();
+    editorPane.setEditable(false);
+    editorPane.setPreferredSize(new Dimension(220, 350));
+    
+    JScrollPane scrollPane = new JScrollPane();
+    scrollPane.setViewportView(editorPane);
+    panel_4.add(scrollPane);
+    
+    this.ihm = ihm;
+    this.rp = rp;
+    textFieldIdentifiant.setText(this.ihm.easyGec.getOrienteurs().getOrienteur(rp.getPuce().getIdPuce()));
+    initCircuits();
+    textFieldIdentifiant.selectAll();
+    //reLoadPage();
+    if(ihm.autoResult)
+    {
+      IhmSmiley is;
+      if(getMinNbPM() == 0)
+      {
+        is = new IhmSmiley(true, TimeManager.fullTime(this.rp.arrivee-this.rp.depart), ihm.easyGec);
+      }
+      else
+      {
+        if(this.ihm.easyGec.isAbc())
+        {
+          is = new IhmSmiley(false, rp.getTexteFormate(), ihm.easyGec);
+        }
+        else
+        {
+          is = new IhmSmiley(false, "PM", ihm.easyGec);
+        }
+      }
+      is.setLocationRelativeTo(IhmResultatPuce.this);
+      //is.setVisible(true);
+      /*
+      try
+      {
+        Thread.sleep(ihm.easyGec.getTempo()*1000);
+        //Thread.sleep(4000);
+      }
+      catch (InterruptedException e)
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      is.dispose();*/
+      doClickOk();
+    }
+  }
+  
+  private void calculResultatsPuce()
+  {
+    for(int i=0; i<comboBoxCircuits.getItemCount(); i++)
+    {
+      int resultat = 0;
+      if(comboBoxCircuits.getItemAt(i).isEnLigne())
+      {
+        EnLigne el = new EnLigne(comboBoxCircuits.getItemAt(i).getCodesToArray(), rp.getCodes(), rp.getTemps());
+        rp.okPm = el.getOkPm();
+        resultat = rp.getNbPM();
+      }
+      else
+      {
+        AuScore as = new AuScore(comboBoxCircuits.getItemAt(i).getCodesToArray(), rp.getCodes(), rp.getTemps());
+        rp.okPm =as.getOkPm();
+        resultat = rp.getNbPM();
+      }
+      resultatsPuce.add(resultat);
+    }
+  }
+  
+  private int getMinPM()
+  {
+    int index = 0;
+    int retour = resultatsPuce.get(0);
+    for(int i=1; i<resultatsPuce.size(); i++)
+    {
+      if(retour>resultatsPuce.get(i))
+      {
+        retour = resultatsPuce.get(i);
+        index = i;
+      }
+    }
+    return index;
+  }
+  
+  private int getMinNbPM()
+  {
+    int retour = resultatsPuce.get(0);
+    for(int i=1; i<resultatsPuce.size(); i++)
+    {
+      if(retour>resultatsPuce.get(i))
+      {
+        retour = resultatsPuce.get(i);
+      }
+    }
+    return retour;
+  }
+
+  private void initCircuits()
+  {
+    comboBoxCircuits.setModel(new DefaultComboBoxModel<Circuit>(ihm.easyGec.getCircuit().getCircuits()));
+    comboBoxCircuits.repaint();
+    comboBoxCircuits.setSelectedIndex(-1);
+    calculResultatsPuce();
+    if(comboBoxCircuits.getItemCount()>0)
+    {
+      comboBoxCircuits.setSelectedIndex(getMinPM());
+    }
+  }
+  
+  private void addResultatPuce()
+  {
+    rp.setCircuit((Circuit) comboBoxCircuits.getSelectedItem());
+    rp.setIdentifiant(textFieldIdentifiant.getText());
+    rp.setDatas(ihm.easyGec.getOrienteurs().getDatas(textFieldIdentifiant.getText()));
+    ihm.easyGec.getResultats().getResultats().add(rp);
+    //ihm.enregistreResultats();
+  }
+  
+  private void printResultat()
+  {
+    //MessageFormat header = new MessageFormat(owner.geRaid.nomRaid);
+    //MessageFormat footer = new MessageFormat("Cette épreuve est gérée par le logiciel GeRaid.");
+    PrinterJob job = PrinterJob.getPrinterJob();
+    //System.out.println(job.);
+    PageFormat format = job.validatePage(new PageFormat());
+    int largeur = (int) (format.getWidth() - 10);
+    PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
+
+    pras.add(new MediaPrintableArea(5, 5, largeur, editorPane.getHeight(), MediaPrintableArea.MM));
+    try
+    {
+      editorPane.print(null, null, false, null, pras, false);
+    }
+    catch (PrinterException e1)
+    {
+      System.out.println(e1.getMessage());
+    }
+  }
+  
+  private void reLoadPage()
+  {
+    try
+    {
+      editorPane.setDocument(new HTMLDocument());
+      String adresse = new File(".").getCanonicalPath().toString();
+      editorPane.setPage("file:///" + adresse + "/temp.html");
+    }
+    catch (IOException et)
+    {
+      System.err.format("Impossible de charger la page", et.getMessage());
+    }
+  }
+  
+  public void doClickOk()
+  {
+    btnOk.doClick();
+  }
+}
