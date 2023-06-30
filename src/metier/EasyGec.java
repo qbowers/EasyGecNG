@@ -74,7 +74,7 @@ public class EasyGec
   private Vector<Integer> resultatsPuce = new Vector<Integer>();
   private static langages langages = new langages();
   private static Vector<String> langs = new Vector<String>();
-  private static String langUsed = "Français";
+  private static String langUsed = "English";
   
   public EasyGec(IhmEasyGec ihm)
   {
@@ -130,7 +130,7 @@ public class EasyGec
       }
     }
     ihm.enregistreResultats();
-    JOptionPane.showMessageDialog(ihm, count + " résultats ont été associés.", "Association terminée", JOptionPane.INFORMATION_MESSAGE);
+    JOptionPane.showMessageDialog(ihm, count + " rï¿½sultats ont ï¿½tï¿½ associï¿½s.", "Association terminï¿½e", JOptionPane.INFORMATION_MESSAGE);
   }
   
   private void calculResultatsPuce(ResultatPuce rp)
@@ -170,7 +170,7 @@ public class EasyGec
     return index;
   }
 
-  // Pour Martin --> regroupement des résultats de tous les circuits
+  // Pour Martin --> regroupement des rï¿½sultats de tous les circuits
  public void CalculResultatsUNSS()
   {
     setResultatscircuit(new Vector<ResultatCircuit>());
