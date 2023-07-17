@@ -22,5 +22,6 @@
 hs_err_pid*
 replay_pid*
 
-# Compiled IntelliJ files
+# IntelliJ files
 out/
+.idea/
