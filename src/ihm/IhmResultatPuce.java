@@ -227,19 +227,20 @@ public class IhmResultatPuce extends JDialog
     if(ihm.autoResult)
     {
       IhmSmiley is;
-      if(getMinNbPM() == 0)
+      int min = getMinNbPM();
+      if(min == 0)
       {
-        is = new IhmSmiley(true, TimeManager.fullTime(this.rp.arrivee-this.rp.depart), ihm.easyGec);
+        is = new IhmSmiley(min, TimeManager.fullTime(this.rp.arrivee-this.rp.depart), ihm.easyGec);
       }
       else
       {
         if(this.ihm.easyGec.isAbc())
         {
-          is = new IhmSmiley(false, rp.getTexteFormate(), ihm.easyGec);
+          is = new IhmSmiley(min, rp.getTexteFormate(), ihm.easyGec);
         }
         else
         {
-          is = new IhmSmiley(false, "PM", ihm.easyGec);
+          is = new IhmSmiley(min, "PM", ihm.easyGec);
         }
       }
       is.setLocationRelativeTo(IhmResultatPuce.this);
@@ -333,7 +334,7 @@ public class IhmResultatPuce extends JDialog
   private void printResultat()
   {
     //MessageFormat header = new MessageFormat(owner.geRaid.nomRaid);
-    //MessageFormat footer = new MessageFormat("Cette épreuve est gérée par le logiciel GeRaid.");
+    //MessageFormat footer = new MessageFormat("Cette ï¿½preuve est gï¿½rï¿½e par le logiciel GeRaid.");
     PrinterJob job = PrinterJob.getPrinterJob();
     //System.out.println(job.);
     PageFormat format = job.validatePage(new PageFormat());
