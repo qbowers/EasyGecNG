@@ -32,13 +32,13 @@ public class IhmSmiley extends JDialog
   private static final long serialVersionUID = 7632301975013806226L;
   public AudioClip applause = Applet.newAudioClip(getClass().getResource("/sons/applause.wav"));
   public AudioClip ohno = Applet.newAudioClip(getClass().getResource("/sons/ohno.wav"));
-  public static Dimension dimEcran = Toolkit.getDefaultToolkit().getScreenSize(); // récupération de la dimension de l'écran  //  @jve:decl-index=0:
+  public static Dimension dimEcran = Toolkit.getDefaultToolkit().getScreenSize(); // rï¿½cupï¿½ration de la dimension de l'ï¿½cran  //  @jve:decl-index=0:
   private ImageIcon icon;
   private JEditorPane editorPane;
   private boolean pause = false;
   private JButton btnNewButton;
   
-  public IhmSmiley(boolean good, String temps, EasyGec easyGec) 
+  public IhmSmiley(int missed, String temps, EasyGec easyGec)
   {
     setAlwaysOnTop(true);    
     setUndecorated(true);
@@ -71,7 +71,7 @@ public class IhmSmiley extends JDialog
     setSize(dimEcran.width, dimEcran.height);
     btnNewButton.setSize(dimEcran.height, dimEcran.height);
     
-    if(good)
+    if(missed<1)
     {
       icon = new ImageIcon(IhmSmiley.class.getResource("/icones/glassy-smiley-good-green.png"));
     }
@@ -102,7 +102,7 @@ public class IhmSmiley extends JDialog
     {
       lblTime.setText("");
     }
-    reLoadPage(good);
+    reLoadPage(missed);
     this.setVisible(true);
     try
     {
@@ -121,7 +121,7 @@ public class IhmSmiley extends JDialog
   }
 
   
-  private void reLoadPage(boolean good)
+  private void reLoadPage(int missed)
   {
     try
     {
@@ -133,7 +133,7 @@ public class IhmSmiley extends JDialog
     {
       System.err.format("Impossible de charger la page", et.getMessage());
     }
-    if(good)
+    if(missed<1)
     {
       applause.play();
     }
