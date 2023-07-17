@@ -31,6 +31,7 @@ public class IhmSmiley extends JDialog
    */
   private static final long serialVersionUID = 7632301975013806226L;
   public AudioClip applause = Applet.newAudioClip(getClass().getResource("/sons/applause.wav"));
+  public AudioClip encouragement = Applet.newAudioClip(getClass().getResource("/sons/encouragement.wav"));
   public AudioClip ohno = Applet.newAudioClip(getClass().getResource("/sons/ohno.wav"));
   public static Dimension dimEcran = Toolkit.getDefaultToolkit().getScreenSize(); // r�cup�ration de la dimension de l'�cran  //  @jve:decl-index=0:
   private ImageIcon icon;
@@ -74,6 +75,10 @@ public class IhmSmiley extends JDialog
     if(missed<1)
     {
       icon = new ImageIcon(IhmSmiley.class.getResource("/icones/glassy-smiley-good-green.png"));
+    }
+    else if(missed==1)
+    {
+      icon = new ImageIcon(IhmSmiley.class.getResource("/icones/almost_there.png"));
     }
     else
     {
@@ -136,6 +141,10 @@ public class IhmSmiley extends JDialog
     if(missed<1)
     {
       applause.play();
+    }
+    else if(missed==1)
+    {
+      encouragement.play();
     }
     else
     {
