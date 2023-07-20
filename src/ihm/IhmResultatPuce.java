@@ -61,9 +61,17 @@ public class IhmResultatPuce extends JDialog
 
   /**
    * Create the frame.
+   * @param ihm an instance of the application
+   * @param rp  an instance of ResultatPuce from /src/to
+   *
+   * IhmResultatPuce only called from SIReaderHandler
    */
   public IhmResultatPuce(final IhmEasyGec ihm, final ResultatPuce rp)
   {
+
+    /*
+      creates 'New Result' tab
+     */
     setModal(true);
     setResizable(false);
     setTitle(EasyGec.getLangages().getText("90", EasyGec.getLang()));
@@ -74,12 +82,18 @@ public class IhmResultatPuce extends JDialog
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     contentPane.setLayout(new BorderLayout(0, 0));
     setContentPane(contentPane);
-    
+
+    /*
+      creates 'actions' panel
+     */
     JPanel panel = new JPanel();
     panel.setPreferredSize(new Dimension(60, 10));
     panel.setBorder(new TitledBorder(null, EasyGec.getLangages().getText("104", EasyGec.getLang()), TitledBorder.LEADING, TitledBorder.TOP, null, null));
     contentPane.add(panel, BorderLayout.EAST);
-    
+
+    /*
+      creates 'Validate the result' button
+     */
     btnOk = new JButton("");
     btnOk.addActionListener(new ActionListener() 
     {
@@ -97,7 +111,10 @@ public class IhmResultatPuce extends JDialog
     btnOk.setPreferredSize(new Dimension(48, 48));
     btnOk.setToolTipText(EasyGec.getLangages().getText("91", EasyGec.getLang()));
     panel.add(btnOk);
-    
+
+    /*
+      creates 'validate and print result' button
+     */
     JButton btnOkPrint = new JButton("");
     btnOkPrint.addActionListener(new ActionListener() 
     {
@@ -116,7 +133,10 @@ public class IhmResultatPuce extends JDialog
     btnOkPrint.setToolTipText(EasyGec.getLangages().getText("92", EasyGec.getLang()));
     btnOkPrint.setIcon(new ImageIcon(IhmResultatPuce.class.getResource("/icones/okPrint.png")));
     panel.add(btnOkPrint);
-    
+
+    /*
+      creates 'print the result' button
+     */
     JButton btnPrint = new JButton("");
     btnPrint.addActionListener(new ActionListener() 
     {
@@ -132,7 +152,10 @@ public class IhmResultatPuce extends JDialog
     btnPrint.setToolTipText(EasyGec.getLangages().getText("93", EasyGec.getLang()));
     btnPrint.setPreferredSize(new Dimension(48, 48));
     panel.add(btnPrint);
-    
+
+    /*
+      creates 'cancel the result' button
+     */
     JButton btnAnnuler = new JButton("");
     btnAnnuler.addActionListener(new ActionListener() 
     {
@@ -145,13 +168,19 @@ public class IhmResultatPuce extends JDialog
     btnAnnuler.setPreferredSize(new Dimension(48, 48));
     btnAnnuler.setIcon(new ImageIcon(IhmResultatPuce.class.getResource("/icones/back.png")));
     panel.add(btnAnnuler);
-    
+
+    /*
+      creates 'result' panel
+     */
     JPanel panel_1 = new JPanel();
     FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
     flowLayout.setAlignment(FlowLayout.LEFT);
     panel_1.setBorder(new TitledBorder(null, EasyGec.getLangages().getText("95", EasyGec.getLang()), TitledBorder.LEADING, TitledBorder.TOP, null, null));
     contentPane.add(panel_1, BorderLayout.CENTER);
-    
+
+    /*
+      add 'ID' field to result panel
+     */
     JPanel panel_2 = new JPanel();
     panel_1.add(panel_2);
     
@@ -163,7 +192,10 @@ public class IhmResultatPuce extends JDialog
     textFieldIdentifiant.setPreferredSize(new Dimension(150, 20));
     panel_2.add(textFieldIdentifiant);
     textFieldIdentifiant.setColumns(18);
-    
+
+    /*
+      add 'Course' field to result panel
+     */
     JPanel panel_3 = new JPanel();
     panel_1.add(panel_3);
     
@@ -260,7 +292,13 @@ public class IhmResultatPuce extends JDialog
       doClickOk();
     }
   }
-  
+
+  /**
+   * calculResultatsPuce():
+   * calculates information about run comparing to every course in comboBoxCircuits
+   * determines trad or score-o course
+   * adds result to resultatsPuce collection
+   */
   private void calculResultatsPuce()
   {
     for(int i=0; i<comboBoxCircuits.getItemCount(); i++)
@@ -281,7 +319,10 @@ public class IhmResultatPuce extends JDialog
       resultatsPuce.add(resultat);
     }
   }
-  
+
+  /**
+   * @return index of minimum value in resultatsPuce
+   */
   private int getMinPM()
   {
     int index = 0;
@@ -296,7 +337,10 @@ public class IhmResultatPuce extends JDialog
     }
     return index;
   }
-  
+
+  /**
+   * @return minimum value in resultatsPuce
+   */
   private int getMinNbPM()
   {
     int retour = resultatsPuce.get(0);
@@ -310,6 +354,10 @@ public class IhmResultatPuce extends JDialog
     return retour;
   }
 
+  /**
+   * sets up the comboBox collection
+   * sets selected index to course with minimum # missed checkpoints
+   */
   private void initCircuits()
   {
     comboBoxCircuits.setModel(new DefaultComboBoxModel<Circuit>(ihm.easyGec.getCircuit().getCircuits()));
