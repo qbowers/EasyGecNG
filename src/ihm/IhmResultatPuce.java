@@ -317,6 +317,8 @@ public class IhmResultatPuce extends JDialog
         resultat = rp.getNbPM();
       }
       resultatsPuce.add(resultat);
+
+      System.out.println(resultat);
     }
   }
 
