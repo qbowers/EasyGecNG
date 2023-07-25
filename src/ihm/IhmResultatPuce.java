@@ -259,7 +259,7 @@ public class IhmResultatPuce extends JDialog
     if(ihm.autoResult)
     {
       IhmSmiley is;
-      int min = getMinNbPM();
+      int min = getMinNbPM(); //min holds the number of missed checkpoints of the most accurate course (minimum missed checkpoints)
       if(min == 0)
       {
         is = new IhmSmiley(min, TimeManager.fullTime(this.rp.arrivee-this.rp.depart), ihm.easyGec);
@@ -310,6 +310,7 @@ public class IhmResultatPuce extends JDialog
         EnLigne el = new EnLigne(comboBoxCircuits.getItemAt(i).getCodesToArray(), rp.getCodes(), rp.getTemps());
         rp.okPm = el.getOkPm();
         resultat = rp.getNbPM();
+        System.out.println(rp.getCodes());
       }
       else
       {
@@ -371,6 +372,9 @@ public class IhmResultatPuce extends JDialog
     if(comboBoxCircuits.getItemCount()>0)
     {
       comboBoxCircuits.setSelectedIndex(getMinPM());
+    }
+    for (int i = 0; i < resultatsPuce.size(); i++) {
+      System.out.println("*** resultatPuce[" + i + "]: " + resultatsPuce.get(i));
     }
   }
   
