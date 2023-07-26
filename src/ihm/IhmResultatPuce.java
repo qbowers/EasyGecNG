@@ -301,7 +301,7 @@ public class IhmResultatPuce extends JDialog
    */
   private void calculResultatsPuce()
   {
-    System.out.println("calculResultatsPuce()");
+    System.out.println("..........calculResultatsPuce()");
     for(int i=0; i<comboBoxCircuits.getItemCount(); i++)
     {
       int resultat = 0;
@@ -310,7 +310,6 @@ public class IhmResultatPuce extends JDialog
         EnLigne el = new EnLigne(comboBoxCircuits.getItemAt(i).getCodesToArray(), rp.getCodes(), rp.getTemps());
         rp.okPm = el.getOkPm();
         resultat = rp.getNbPM();
-        System.out.println(rp.getCodes());
       }
       else
       {
@@ -327,7 +326,7 @@ public class IhmResultatPuce extends JDialog
    */
   private int getMinPM()
   {
-    System.out.println("getMinPM()");
+    System.out.println("..........getMinPM()");
     int index = 0;
     int retour = resultatsPuce.get(0);
     for(int i=1; i<resultatsPuce.size(); i++)
@@ -346,7 +345,7 @@ public class IhmResultatPuce extends JDialog
    */
   private int getMinNbPM()
   {
-    System.out.println("getMinNbPM()");
+    System.out.println("..........getMinNbPM()");
     int retour = resultatsPuce.get(0);
     for(int i=1; i<resultatsPuce.size(); i++)
     {
@@ -364,7 +363,7 @@ public class IhmResultatPuce extends JDialog
    */
   private void initCircuits()
   {
-    System.out.println("initCircuits()");
+    System.out.println("..........initCircuits()");
     comboBoxCircuits.setModel(new DefaultComboBoxModel<Circuit>(ihm.easyGec.getCircuit().getCircuits()));
     comboBoxCircuits.repaint();
     comboBoxCircuits.setSelectedIndex(-1);
@@ -374,13 +373,13 @@ public class IhmResultatPuce extends JDialog
       comboBoxCircuits.setSelectedIndex(getMinPM());
     }
     for (int i = 0; i < resultatsPuce.size(); i++) {
-      System.out.println("*** resultatPuce[" + i + "]: " + resultatsPuce.get(i));
+      System.out.println("missed punches on this course:    resultatPuce[" + i + "]: " + resultatsPuce.get(i));
     }
   }
   
   private void addResultatPuce()
   {
-    System.out.println("addResultatPuce()");
+    System.out.println("..........addResultatPuce()");
     rp.setCircuit((Circuit) comboBoxCircuits.getSelectedItem());
     rp.setIdentifiant(textFieldIdentifiant.getText());
     rp.setDatas(ihm.easyGec.getOrienteurs().getDatas(textFieldIdentifiant.getText()));
