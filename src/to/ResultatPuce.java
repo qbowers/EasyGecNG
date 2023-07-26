@@ -92,14 +92,14 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
  
     do 
     {
-      // hypothèse : le tableau est trié
+      // hypothï¿½se : le tableau est triï¿½
       permut = false;
       for (int i = 0; i < longueur - 1; i++) 
       {
-        // Teste si 2 éléments successifs sont dans le bon ordre ou non
+        // Teste si 2 ï¿½lï¿½ments successifs sont dans le bon ordre ou non
         if (temps[i].compareTo( temps[i + 1])>0) 
         {
-          // s'ils ne le sont pas, on échange leurs positions
+          // s'ils ne le sont pas, on ï¿½change leurs positions
           tamponString = temps[i];
           temps[i] = temps[i + 1];
           temps[i + 1] = tamponString;
@@ -202,9 +202,9 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
   
   private void calculOkPm()
   {
-    // récupération des codes à trouver
+    // rï¿½cupï¿½ration des codes ï¿½ trouver
     codesATrouver = circuit.getCodesToArray();
-    // récupération des codes de la puce
+    // rï¿½cupï¿½ration des codes de la puce
     Vector<Integer> codesPuce = getCodes();
     Vector<String> tempsPuce = getTemps();
     // calcul des OK et PM
@@ -246,7 +246,7 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
     retour.append("<b>" + EasyGec.getLangages().getText("96", EasyGec.getLang()) + "</b> " + getIdentifiant() + "<br>");
     retour.append("<b>" + EasyGec.getLangages().getText("97", EasyGec.getLang()) + "</b> " + getCircuit().getNom() + "");   
     
-    //  Résultats globaux de l'étape
+    //  Rï¿½sultats globaux de l'ï¿½tape
     //retour.append("<br>");
     retour.append("<br>");
     if(circuit.isDepartBoitier())
