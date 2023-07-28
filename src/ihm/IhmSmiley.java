@@ -78,7 +78,7 @@ public class IhmSmiley extends JDialog
     }
     else if(missed==1)
     {
-      icon = new ImageIcon(IhmSmiley.class.getResource("/icones/almost_there.png"));
+      icon = new ImageIcon(IhmSmiley.class.getResource("/icones/smiley-almost-there.png"));
     }
     else
     {
@@ -97,8 +97,9 @@ public class IhmSmiley extends JDialog
     lblTime.setFont(new Font("Tahoma", Font.PLAIN, 60));
     lblTime.setHorizontalAlignment(SwingConstants.CENTER);
     lblTime.setPreferredSize(new Dimension(14, 100));
+    //getContentPane().add(lblTime, BorderLayout.NORTH);
     getContentPane().add(lblTime, BorderLayout.SOUTH);
-    
+
     if(temps.compareTo("0:00:00")!=0)
     {
       lblTime.setText(temps);
