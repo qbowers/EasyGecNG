@@ -250,12 +250,7 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
       }
     }
     return missedCheckpoints;
-  } //new method accessible to other classes that returns array of missed punches
-
-  /*
-
-        System.out.println("control " + (i+1) + " missed"); //goal: (eventually) be able to pass indexes of missed checkpoints to IhmSmiley
-   */
+  }
 
   public String toHtml()
   {

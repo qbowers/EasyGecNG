@@ -260,7 +260,8 @@ public class IhmResultatPuce extends JDialog
     {
       IhmSmiley is;
       int min = getMinNbPM(); //min holds the number of missed checkpoints of the most accurate course (minimum missed checkpoints)
-      //TODO: create String or array of missed checkpoints (index numbers) to pass to IhmSmiley
+
+      //construct String 'missedIndex' of missed checkpoint indexes to pass to IhmSmiley
       Vector<Integer> missedCheckpoints = rp.getMissed();
       int size = missedCheckpoints.size();
       String missedIndex = "";
@@ -270,7 +271,6 @@ public class IhmResultatPuce extends JDialog
           missedIndex += ", ";
         }
         missedIndex += missedCheckpoints.get(size-1);
-
       }
 
       String text = (min < 2) ? "You only missed 1 checkpoint!" : "You missed " + min + " checkpoints";
