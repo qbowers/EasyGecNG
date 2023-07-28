@@ -97,8 +97,13 @@ public class IhmSmiley extends JDialog
     lblTime.setFont(new Font("Tahoma", Font.PLAIN, 60));
     lblTime.setHorizontalAlignment(SwingConstants.CENTER);
     lblTime.setPreferredSize(new Dimension(14, 100));
-    getContentPane().add(lblTime, BorderLayout.EAST);
-    // getContentPane().add(lblTime, BorderLayout.SOUTH);
+    getContentPane().add(lblTime, BorderLayout.SOUTH);
+
+    JLabel lblMissed = new JLabel("PM");
+    lblMissed.setFont(new Font("Tahoma", Font.PLAIN, 60));
+    lblMissed.setHorizontalAlignment(SwingConstants.CENTER);
+    lblMissed.setPreferredSize(new Dimension(14, 100));
+    getContentPane().add(lblMissed, BorderLayout.NORTH);
 
     if(temps.compareTo("0:00:00")!=0)
     {
