@@ -268,7 +268,7 @@ public class IhmResultatPuce extends JDialog
       else {
         text = "You missed more than 1 checkpoint";
       } */
-      String text = (min < 2) ? "You only missed 1 checkpoint!" : "You missed more than 1 checkpoint";
+      String text = (min < 2) ? "You only missed 1 checkpoint!" : "You missed " + min + " checkpoints";
       if(min == 0)
       {
         is = new IhmSmiley(min, TimeManager.fullTime(this.rp.arrivee-this.rp.depart), ihm.easyGec);

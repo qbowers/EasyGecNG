@@ -39,7 +39,7 @@ public class IhmSmiley extends JDialog
   private boolean pause = false;
   private JButton btnNewButton;
   
-  public IhmSmiley(int missed, String temps, EasyGec easyGec)
+  public IhmSmiley(int numberMissed, String temps, EasyGec easyGec)
   {
     setAlwaysOnTop(true);    
     setUndecorated(true);
@@ -72,13 +72,13 @@ public class IhmSmiley extends JDialog
     setSize(dimEcran.width, dimEcran.height);
     btnNewButton.setSize(dimEcran.height, dimEcran.height);
     
-    if(missed<1)
+    if(numberMissed<1)
     {
       icon = new ImageIcon(IhmSmiley.class.getResource("/icones/glassy-smiley-good-green.png"));
     }
-    else if(missed==1)
+    else if(numberMissed==1)
     {
-      icon = new ImageIcon(IhmSmiley.class.getResource("/icones/almost_there.png"));
+      icon = new ImageIcon(IhmSmiley.class.getResource("/icones/smiley-almost-there.png"));
     }
     else
     {
@@ -99,12 +99,6 @@ public class IhmSmiley extends JDialog
     lblTime.setPreferredSize(new Dimension(14, 100));
     getContentPane().add(lblTime, BorderLayout.SOUTH);
 
-    JLabel lblMissed = new JLabel("PM");
-    lblMissed.setFont(new Font("Tahoma", Font.PLAIN, 60));
-    lblMissed.setHorizontalAlignment(SwingConstants.CENTER);
-    lblMissed.setPreferredSize(new Dimension(14, 100));
-    getContentPane().add(lblMissed, BorderLayout.NORTH);
-
     if(temps.compareTo("0:00:00")!=0)
     {
       lblTime.setText(temps);
@@ -113,7 +107,21 @@ public class IhmSmiley extends JDialog
     {
       lblTime.setText("");
     }
-    reLoadPage(missed);
+
+    JLabel lblMissed = new JLabel("PM");
+    lblMissed.setFont(new Font("Tahoma", Font.PLAIN, 60));
+    lblMissed.setHorizontalAlignment(SwingConstants.CENTER);
+    lblMissed.setPreferredSize(new Dimension(14, 100));
+    getContentPane().add(lblMissed, BorderLayout.NORTH);
+
+    if (numberMissed>0) {
+      lblMissed.setText("Missed: ");
+    }
+    else {
+      lblMissed.setText("All checkpoints correct!");
+    }
+
+    reLoadPage(numberMissed);
     this.setVisible(true);
     try
     {
@@ -132,7 +140,7 @@ public class IhmSmiley extends JDialog
   }
 
   
-  private void reLoadPage(int missed)
+  private void reLoadPage(int numberMissed)
   {
     try
     {
@@ -144,11 +152,11 @@ public class IhmSmiley extends JDialog
     {
       System.err.format("Impossible de charger la page", et.getMessage());
     }
-    if(missed<1)
+    if(numberMissed<1)
     {
       applause.play();
     }
-    else if(missed==1)
+    else if(numberMissed==1)
     {
       encouragement.play();
     }
