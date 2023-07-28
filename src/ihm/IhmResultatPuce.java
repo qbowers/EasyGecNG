@@ -272,7 +272,7 @@ public class IhmResultatPuce extends JDialog
         }
         else
         {
-          is = new IhmSmiley(min, "Test", ihm.easyGec);
+          is = new IhmSmiley(min, "PM", ihm.easyGec);
         }
       }
       is.setLocationRelativeTo(IhmResultatPuce.this);
