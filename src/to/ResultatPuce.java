@@ -276,6 +276,7 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
       }
       else
       {
+        System.out.println("control " + (i+1) + " missed"); //goal: (eventually) be able to pass indexes of missed checkpoints to IhmSmiley
         retour.append("<font color=red>");
         retour.append("<tr align=center><td>" + (i+1) + "</td><td><b>" + codesATrouver[i] + "</b></td>");
         retour.append("<td>PM</td><td>----</td></tr>");
@@ -349,6 +350,8 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
   {
     return puce.getCodes();
   }
+
+  //public Vector<Integer> getMissed() { return } //new method accessible to other classes that returns array of missed punches
 
   /**
    * @return the puce

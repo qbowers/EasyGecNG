@@ -260,14 +260,8 @@ public class IhmResultatPuce extends JDialog
     {
       IhmSmiley is;
       int min = getMinNbPM(); //min holds the number of missed checkpoints of the most accurate course (minimum missed checkpoints)
-      /*
-      String text = "";
-      if (min == 1) {
-        text = "You only missed 1 checkpoint!";
-      }
-      else {
-        text = "You missed more than 1 checkpoint";
-      } */
+      //TODO: create String or array of missed checkpoints (index numbers) to pass to IhmSmiley
+
       String text = (min < 2) ? "You only missed 1 checkpoint!" : "You missed " + min + " checkpoints";
       if(min == 0)
       {
@@ -367,7 +361,7 @@ public class IhmResultatPuce extends JDialog
     }
     return retour;
   }
-
+r
   /**
    * sets up the comboBox collection
    * sets selected index to course with minimum # missed checkpoints
