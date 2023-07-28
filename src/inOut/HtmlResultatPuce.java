@@ -32,9 +32,11 @@ public class HtmlResultatPuce
     try
     {
       monFichier = new BufferedWriter ( new FileWriter ( chemin )) ;
-      
-      StringBuffer tampon = new StringBuffer("<html>\n<head>\n<STYLE TYPE='text/css'>\n<!--\nTH{font-family: Arial; font-size: 10pt;}\nTD{font-family: Arial; font-size: 10pt;}\n--->\n</STYLE>\n</head>\n<body>");
-      tampon.append("<font size=2>");
+
+      StringBuffer tampon = new StringBuffer("<html>\n<head>\n<STYLE TYPE='text/css'>\n<!--\nTH{font-family: Arial; font-size: 20pt;}\nTD{font-family: Arial; font-size: 20pt;}\n--->\n</STYLE>\n</head>\n<body>");
+      //StringBuffer tampon = new StringBuffer("<html>\n<head>\n<STYLE TYPE='text/css'>\n<!--\nTH{font-family: Arial; font-size: 10pt;}\nTD{font-family: Arial; font-size: 10pt;}\n--->\n</STYLE>\n</head>\n<body>");
+      //tampon.append("<font size=2>");
+      tampon.append("<font size=12>");
       //tampon.append(geraid.entete + "<br>");
       //tampon.append("<b>" + re.getCircuit().getNom() + "</b><br><br>");
       tampon.append(re.toHtml());
