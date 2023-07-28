@@ -91,13 +91,17 @@ public class IhmSmiley extends JDialog
     
     editorPane = new JEditorPane();
     editorPane.setPreferredSize(new Dimension(220, 20));
+    // Trying to change the font; BB 7/27/23
+    // Probably won't work...
+    editorPane.setFont(new Font("Tahoma", Font.PLAIN, 30));
+
     getContentPane().add(editorPane, BorderLayout.WEST);
     
     JLabel lblTime = new JLabel("PM");
     lblTime.setFont(new Font("Tahoma", Font.PLAIN, 60));
     lblTime.setHorizontalAlignment(SwingConstants.CENTER);
     lblTime.setPreferredSize(new Dimension(14, 100));
-    getContentPane().add(lblTime, BorderLayout.EAST);
+    getContentPane().add(lblTime, BorderLayout.SOUTH);
     // getContentPane().add(lblTime, BorderLayout.SOUTH);
 
     if(temps.compareTo("0:00:00")!=0)
