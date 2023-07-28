@@ -39,7 +39,7 @@ public class IhmSmiley extends JDialog
   private boolean pause = false;
   private JButton btnNewButton;
   
-  public IhmSmiley(int numberMissed, String temps, EasyGec easyGec)
+  public IhmSmiley(int numberMissed, String missedStr, String temps, EasyGec easyGec)
   {
     setAlwaysOnTop(true);    
     setUndecorated(true);
@@ -108,14 +108,14 @@ public class IhmSmiley extends JDialog
       lblTime.setText("");
     }
 
-    JLabel lblMissed = new JLabel("PM");
+    JLabel lblMissed = new JLabel(missedStr);
     lblMissed.setFont(new Font("Tahoma", Font.PLAIN, 60));
     lblMissed.setHorizontalAlignment(SwingConstants.CENTER);
     lblMissed.setPreferredSize(new Dimension(14, 100));
     getContentPane().add(lblMissed, BorderLayout.NORTH);
 
     if (numberMissed>0) {
-      lblMissed.setText("Missed: ");
+      lblMissed.setText("Missed: " + missedStr);
     }
     else {
       lblMissed.setText("All checkpoints correct!");

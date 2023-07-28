@@ -261,21 +261,32 @@ public class IhmResultatPuce extends JDialog
       IhmSmiley is;
       int min = getMinNbPM(); //min holds the number of missed checkpoints of the most accurate course (minimum missed checkpoints)
       //TODO: create String or array of missed checkpoints (index numbers) to pass to IhmSmiley
+      Vector<Integer> missedCheckpoints = rp.getMissed();
+      int size = missedCheckpoints.size();
+      String missedIndex = "";
+      if (size>0) {
+        for (int i = 0; i < size-1; i++) {
+          missedIndex += missedCheckpoints.get(i);
+          missedIndex += ", ";
+        }
+        missedIndex += missedCheckpoints.get(size-1);
+
+      }
 
       String text = (min < 2) ? "You only missed 1 checkpoint!" : "You missed " + min + " checkpoints";
       if(min == 0)
       {
-        is = new IhmSmiley(min, TimeManager.fullTime(this.rp.arrivee-this.rp.depart), ihm.easyGec);
+        is = new IhmSmiley(min, missedIndex, TimeManager.fullTime(this.rp.arrivee-this.rp.depart), ihm.easyGec);
       }
       else
       {
         if(this.ihm.easyGec.isAbc())
         {
-          is = new IhmSmiley(min, rp.getTexteFormate(), ihm.easyGec);
+          is = new IhmSmiley(min, missedIndex, rp.getTexteFormate(), ihm.easyGec);
         }
         else
         {
-          is = new IhmSmiley(min, text, ihm.easyGec);
+          is = new IhmSmiley(min, missedIndex, text, ihm.easyGec);
         }
       }
       is.setLocationRelativeTo(IhmResultatPuce.this);
@@ -361,7 +372,7 @@ public class IhmResultatPuce extends JDialog
     }
     return retour;
   }
-r
+
   /**
    * sets up the comboBox collection
    * sets selected index to course with minimum # missed checkpoints
