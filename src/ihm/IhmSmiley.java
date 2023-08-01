@@ -115,7 +115,7 @@ public class IhmSmiley extends JDialog
     getContentPane().add(lblMissed, BorderLayout.NORTH);
 
     if (numberMissed>0) {
-      lblMissed.setText("Missed: " + missedStr);
+      lblMissed.setText("Missed checkpoints are: " + missedStr);
     }
     else {
       lblMissed.setText("All checkpoints correct!");
