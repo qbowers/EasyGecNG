@@ -41,7 +41,6 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
   private int nbPostes = 0;
   public long depart = -1;
   public long arrivee = -1;
-  
   private Puce puce = new Puce();
   
   public ResultatPuce()
@@ -235,6 +234,22 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
       }
     }
     return retour;
+  }
+
+  /**
+   * accessible from other classes
+   * @return vector of indexes of missed checkpoints
+   */
+  public Vector<Integer> getMissed() {
+    Vector<Integer> missedCheckpoints = new Vector<>();
+    for(int i=0; i<okPm.length; i++)
+    {
+      if(!okPm[i])
+      {
+        missedCheckpoints.add(i+1);
+      }
+    }
+    return missedCheckpoints;
   }
 
   public String toHtml()

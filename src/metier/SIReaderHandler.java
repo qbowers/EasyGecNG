@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.TooManyListenersException;
 
-import net.gecosi .CommStatus;
+import net.gecosi.CommStatus;
 import net.gecosi.SiHandler;
 import net.gecosi.SiListener;
 import net.gecosi.dataframe.SiDataFrame;

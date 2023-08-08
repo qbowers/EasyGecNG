@@ -1,7 +1,6 @@
 package ihm;
 
-import java.awt.EventQueue;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -29,8 +28,10 @@ public class IhmAbcGec extends IhmEasyGec
     {
       public void run()
       {
-        // On récupère le Look courant et on l'applique à notre application
+        // On rï¿½cupï¿½re le Look courant et on l'applique ï¿½ notre application
         try{ UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() ); }
+        catch( Exception e ) {}
+        try{ UIManager.getLookAndFeelDefaults().put("defaultFont", new java.awt.Font("Arial", Font.BOLD, 14)); }
         catch( Exception e ) {}
         // init fichier rxtxSerial.dll
         String version = System.getProperty("sun.arch.data.model");
