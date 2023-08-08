@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JEditorPane;
+import javax.swing.text.PlainDocument;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -108,6 +109,7 @@ public class IhmSmiley extends JDialog
       lblTime.setText("");
     }
 
+    /*
     JLabel lblMissed = new JLabel(missedStr);
     lblMissed.setFont(new Font("Tahoma", Font.PLAIN, 60));
     lblMissed.setHorizontalAlignment(SwingConstants.CENTER);
@@ -120,8 +122,9 @@ public class IhmSmiley extends JDialog
     else {
       lblMissed.setText("All checkpoints correct!");
     }
+    */
 
-    reLoadPage(numberMissed);
+    reLoadPage(numberMissed, missedStr);
     this.setVisible(true);
     try
     {
@@ -140,19 +143,17 @@ public class IhmSmiley extends JDialog
   }
 
   
-  private void reLoadPage(int numberMissed)
+  private void reLoadPage(int numberMissed, String missedStr)
   {
     try
     {
-
-      editorPane.setDocument(new HTMLDocument());
-      String adresse = new File(".").getCanonicalPath().toString();
-      editorPane.setPage("file:///" + adresse + "/temp.html");
-
-
-      editorPane.setText("Test");
+      editorPane.setDocument(new PlainDocument());
+      Font currentFont = editorPane.getFont();
+      Font font = currentFont.deriveFont(48f);
+      editorPane.setFont(font);
+      editorPane.setText("Missed\nControls:\n" + missedStr);
     }
-    catch (IOException et)
+    catch (Exception et)
     {
       System.err.format("Impossible de charger la page", et.getMessage());
     }
