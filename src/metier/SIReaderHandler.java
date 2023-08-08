@@ -105,12 +105,14 @@ public class SIReaderHandler implements SiListener
     rp.getPuce().setStarttime(new Date(card.getStartTime()));
     rp.getPuce().setFinishtime(new Date(card.getFinishTime()));
     Partiel[] partiels = new Partiel[card.getPunches().length];
+    System.out.println("SI card checkpoints:");
     for(int i = 0; i < card.getPunches().length; i++)
     {
       Partiel partiel = new Partiel();
       partiel.setCode(card.getPunches()[i].code());
       partiel.setTime(new Date(card.getPunches()[i].timestamp()));
       partiels[i] = partiel;
+      System.out.println("      " + partiel); //testing: print time at each checkpoint on the SI card
     }
     rp.getPuce().setPartiels(partiels);
   }
