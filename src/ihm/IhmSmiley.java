@@ -130,9 +130,13 @@ public class IhmSmiley extends JDialog
   {
     try
     {
+
       editorPane.setDocument(new HTMLDocument());
       String adresse = new File(".").getCanonicalPath().toString();
       editorPane.setPage("file:///" + adresse + "/temp.html");
+
+
+      editorPane.setText("Test");
     }
     catch (IOException et)
     {
