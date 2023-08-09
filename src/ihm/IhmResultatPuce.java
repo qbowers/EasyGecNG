@@ -273,8 +273,8 @@ public class IhmResultatPuce extends JDialog
         missedIndex += missedCheckpoints.get(size-1);
       }
 
-      String text = (min < 2) ? "You only missed 1 checkpoint!" : "You missed " + min + " checkpoints";
       String elapsedTime = TimeManager.fullTime(this.rp.arrivee-this.rp.depart);
+
       if(min == 0)
       {
         is = new IhmSmiley(min, missedIndex, elapsedTime, ihm.easyGec);

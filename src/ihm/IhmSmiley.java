@@ -77,10 +77,6 @@ public class IhmSmiley extends JDialog
     {
       icon = new ImageIcon(IhmSmiley.class.getResource("/icones/glassy-smiley-good-green.png"));
     }
-    else if(numberMissed==1)
-    {
-      icon = new ImageIcon(IhmSmiley.class.getResource("/icones/smiley-almost-there.png"));
-    }
     else
     {
       icon = new ImageIcon(IhmSmiley.class.getResource("/icones/glassy-smiley-bad.png"));
@@ -160,10 +156,6 @@ public class IhmSmiley extends JDialog
     if(numberMissed<1)
     {
       applause.play();
-    }
-    else if(numberMissed==1)
-    {
-      encouragement.play();
     }
     else
     {
