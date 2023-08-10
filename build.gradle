@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Add dependencies as needed for your project.
+}
+
+application {
+    // Define the main class for your application.
+    mainClassName = 'ihm.IhmEasyGec'
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
