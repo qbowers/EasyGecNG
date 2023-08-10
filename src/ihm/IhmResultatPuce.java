@@ -274,6 +274,8 @@ public class IhmResultatPuce extends JDialog
       }
 
       String elapsedTime = TimeManager.fullTime(this.rp.arrivee-this.rp.depart);
+      String courseName = rp.getCircuit().getNom();
+      System.out.println("course name: " +courseName);
 
       if(min == 0)
       {
