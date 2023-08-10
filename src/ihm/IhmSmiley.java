@@ -40,7 +40,7 @@ public class IhmSmiley extends JDialog
   private boolean pause = false;
   private JButton btnNewButton;
   
-  public IhmSmiley(int numberMissed, String missedStr, String temps, EasyGec easyGec)
+  public IhmSmiley(int numberMissed, String missedStr, String temps, String courseName, EasyGec easyGec)
   {
     setAlwaysOnTop(true);    
     setUndecorated(true);
@@ -120,7 +120,7 @@ public class IhmSmiley extends JDialog
     }
     */
 
-    reLoadPage(numberMissed, missedStr);
+    reLoadPage(numberMissed, missedStr, courseName);
     this.setVisible(true);
     try
     {
@@ -139,7 +139,7 @@ public class IhmSmiley extends JDialog
   }
 
   
-  private void reLoadPage(int numberMissed, String missedStr)
+  private void reLoadPage(int numberMissed, String missedStr, String courseName)
   {
     try
     {
@@ -147,7 +147,7 @@ public class IhmSmiley extends JDialog
       Font currentFont = editorPane.getFont();
       Font font = currentFont.deriveFont(48f);
       editorPane.setFont(font);
-      editorPane.setText("Missed\nControls:\n" + missedStr);
+      editorPane.setText("Course:\n"+ courseName+ "\nMissed\nControls:\n" + missedStr);
     }
     catch (Exception et)
     {

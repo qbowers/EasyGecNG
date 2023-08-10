@@ -272,24 +272,22 @@ public class IhmResultatPuce extends JDialog
         }
         missedIndex += missedCheckpoints.get(size-1);
       }
-
       String elapsedTime = TimeManager.fullTime(this.rp.arrivee-this.rp.depart);
       String courseName = rp.getCircuit().getNom();
-      System.out.println("course name: " +courseName);
 
       if(min == 0)
       {
-        is = new IhmSmiley(min, missedIndex, elapsedTime, ihm.easyGec);
+        is = new IhmSmiley(min, missedIndex, elapsedTime, courseName, ihm.easyGec);
       }
       else
       {
         if(this.ihm.easyGec.isAbc())
         {
-          is = new IhmSmiley(min, missedIndex, rp.getTexteFormate(), ihm.easyGec);
+          is = new IhmSmiley(min, missedIndex, rp.getTexteFormate(), courseName, ihm.easyGec);
         }
         else
         {
-          is = new IhmSmiley(min, missedIndex, elapsedTime, ihm.easyGec);
+          is = new IhmSmiley(min, missedIndex, elapsedTime, courseName, ihm.easyGec);
         }
       }
       is.setLocationRelativeTo(IhmResultatPuce.this);
