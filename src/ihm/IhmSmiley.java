@@ -2,14 +2,11 @@ package ihm;
 
 import java.applet.Applet;
 import java.applet.AudioClip;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JButton;
-import java.awt.BorderLayout;
 import java.io.File;
 import java.io.IOException;
 
@@ -19,9 +16,9 @@ import javax.swing.text.html.HTMLDocument;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import javafx.geometry.Pos;
 import metier.EasyGec;
 
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

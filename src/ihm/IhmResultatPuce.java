@@ -268,7 +268,7 @@ public class IhmResultatPuce extends JDialog
       if (size>0) {
         for (int i = 0; i < size-1; i++) {
           missedIndex += missedCheckpoints.get(i);
-          missedIndex += ", ";
+          missedIndex += "\n";
         }
         missedIndex += missedCheckpoints.get(size-1);
       }
