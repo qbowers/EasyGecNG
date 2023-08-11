@@ -206,6 +206,12 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
     // r�cup�ration des codes de la puce
     Vector<Integer> codesPuce = getCodes();
     Vector<String> tempsPuce = getTemps();
+    //debug print
+    int i = 0;
+    for (String temp : tempsPuce) {
+      System.out.println(codesPuce.get(i) + "  " +tempsPuce.get(i));
+      i++;
+    }
     // calcul des OK et PM
     okPm = new boolean[codesATrouver.length];
     temps = new String[codesATrouver.length];
@@ -302,6 +308,12 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
     retour.append("</table>");
     
     Vector<Integer> codesEnPlus = getCodesEnPlus();
+    /*
+     * how is codesEnPlus stored?
+     */
+    System.out.println(codesEnPlus);
+    System.out.println(getPuce().getPartiels().length);
+
     if(codesEnPlus.size()>0)
     {
       retour.append("<font size=1 color=blue><b>" + EasyGec.getLangages().getText("103", EasyGec.getLang()) + "</b><br>");
