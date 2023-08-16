@@ -320,6 +320,7 @@ public void filterExtra() {
 
     filterExtra();
     int size = codesATrouver.length + extraCodes.size();
+    System.out.println("courseCode length: " + codesATrouver.length + "   extraCodes length: " + extraCodes.size());
 
     String[][] allControls = new String[size][3];
       //column 1: codes
@@ -331,8 +332,6 @@ public void filterExtra() {
     int coursePointer = 0;
     int cardPointer = 0;
 
-    //debug print
-    System.out.println(size);
     String courseTime;
     int courseCode;
     String cardTime;
@@ -360,7 +359,7 @@ public void filterExtra() {
         coursePointer++;
       }
       else {
-        if(courseTime.compareTo(cardTime) < 0 && courseCodes.length>coursePointer) { //time of course checkpoint is earlier than the checkpoint on the si card we're comparing to
+        if((courseTime.compareTo(cardTime) < 0 || cardTime.equals("") ) && courseCodes.length>coursePointer) { //time of course checkpoint is earlier than the checkpoint on the si card we're comparing to
           allControls[i][0] = String.valueOf(courseCode);
           allControls[i][1] = courseTime;
           allControls[i][2] = "correct";
@@ -372,14 +371,7 @@ public void filterExtra() {
           cardPointer++;
         }
       }
-      //debug print
-      //sSystem.out.println(allControls[i][0] + " : " + allControls[i][1] + " : " + allControls[i][2]);
     }
-
-    for (int x=0; x<size; x++) {
-      System.out.println(allControls[x][0] + " : " + allControls[x][1] + " : " + allControls[x][2]);
-    }
-
     return allControls;
   }
 
@@ -413,7 +405,30 @@ public void filterExtra() {
     {
       triResultatsScore();
     }
-    for(int i=0; i<codesATrouver.length; i++)
+
+    String[][] ordered = orderedControlsList();
+
+    System.out.println(ordered.length);
+
+
+    for(int i=0; i<ordered.length; i++) {
+      String designation = ordered[i][2];
+      String color = "black";
+      if(designation.equals("correct")) { //plain text
+        color = "black";
+      } else if(!designation.equals("PM")) { //"extra" - blue text
+        color = "blue";
+      } else { //red text
+        color = "red";
+      }
+
+      retour.append("<font color=" + color);
+      retour.append("<tr align=center><td>" + (i+1) + "</td><td><b>" + ordered[i][0] + "</b></td>");
+      retour.append("<td>"+ordered[i][1]+"</td><td>----</td></tr>");
+      retour.append("</font>");
+
+    }
+    /*
     {
       if(okPm[i])
       {
@@ -431,7 +446,7 @@ public void filterExtra() {
     retour.append("<tr align=center><td></td><td><b>A</b></td>");
     retour.append("<td>" + TimeManager.fullTime(arrivee) + "</td><td>" + getPartiel(codesATrouver.length) + "</td></tr>");
     retour.append("</table>");
-    
+
     Vector<Integer> codesEnPlus = getCodesEnPlus();
 
     if(codesEnPlus.size()>0)
@@ -443,8 +458,7 @@ public void filterExtra() {
       }
       //retour.append("</font>");
     }
-
-    String[][] ordered = orderedControlsList();
+    */
     
     return retour.toString();
   }
