@@ -42,6 +42,10 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
   public long depart = -1;
   public long arrivee = -1;
   private Puce puce = new Puce();
+  public Vector<Integer> cardCodes;
+  public Vector<String> cardTimes;
+  public Vector<Integer> extraCodes = new Vector<Integer>();
+  public Vector<String> extraTimes = new Vector<String>();
   
   public ResultatPuce()
   {
@@ -205,13 +209,9 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
     codesATrouver = circuit.getCodesToArray();
     // r�cup�ration des codes de la puce
     Vector<Integer> codesPuce = getCodes();
+    cardCodes = new Vector<>(codesPuce); //independent copy
     Vector<String> tempsPuce = getTemps();
-    //debug print
-    int i = 0;
-    for (String temp : tempsPuce) {
-      System.out.println(codesPuce.get(i) + "  " +tempsPuce.get(i));
-      i++;
-    }
+    cardTimes = new Vector<>(tempsPuce); //independent copy
     // calcul des OK et PM
     okPm = new boolean[codesATrouver.length];
     temps = new String[codesATrouver.length];
@@ -220,12 +220,24 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
       EnLigne el = new EnLigne(codesATrouver, codesPuce, tempsPuce);
       okPm = el.getOkPm();
       temps = el.getTemps();
+      nullToPM();
     }
     else
     {
       AuScore as = new AuScore(codesATrouver, codesPuce, tempsPuce);
       okPm =as.getOkPm();
       temps = as.getTemps();
+    }
+  }
+
+  /**
+   * noNull() corrects the temps list so that any indexes that are null become PM.
+   */
+  public void nullToPM() {
+    for(int i = 0; i<temps.length; i++) {
+      if(temps[i] == null) {
+        temps[i] = "PM";
+      }
     }
   }
   
@@ -256,6 +268,119 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
       }
     }
     return missedCheckpoints;
+  }
+
+  /**
+   * @param array of integers intArray[]
+   * @return array of strings strArray[]
+   * Purpose: convert variable types to that
+   */
+  public String[] intToString(int[] intArray) {
+    String[] strArray = new String[intArray.length];
+    for(int i=0; i<intArray.length; i++) {
+      strArray[i] = String.valueOf(intArray[i]);
+    }
+    return strArray;
+  }
+
+  /**
+   * take the codes and times from the si card data and filter so that only extra checkpoints are left
+   * will add to global vectors extraCodes and extraTimes by comparing to courseCodes
+   */
+public void filterExtra() {
+  for (int i=0; i<cardCodes.size(); i++) {
+    int cardCode = cardCodes.get(i);
+    //for each cardcode, iterate through courseCodes. if it didn't match any, add to extra codes
+    boolean extra = true;
+    for (int coursecode : codesATrouver) {
+      if (cardCode == coursecode) { //extra control on si card
+        extra = false;
+        break;
+      }
+    }
+    if (extra) {
+      extraCodes.addElement(cardCode);
+      extraTimes.add(cardTimes.get(i));
+    }
+  }
+}
+
+
+  /**
+   * @return 2D array of codes, times, designations
+   * joins the course controls and SI card controls punched
+   * creates and fills matrix for codes, times, and designation (correct, missed, extra)
+   *
+   * extraCodes: vector<int> of all codes on the SI card
+   * extraTimes: vector<str> of all times on the SI card
+   * codesATrouver: list of codes on the guessed course
+   * temps: list of times on the guessed course
+   */
+  public String[][] orderedControlsList() {
+
+    filterExtra();
+    int size = codesATrouver.length + extraCodes.size();
+
+    String[][] allControls = new String[size][3];
+      //column 1: codes
+      //column 2: times
+      //column 3: designation (missed, correct, extra)
+
+    int[] courseCodes = codesATrouver;
+    String[] courseTimes = temps;
+    int coursePointer = 0;
+    int cardPointer = 0;
+
+    //debug print
+    System.out.println(size);
+    String courseTime;
+    int courseCode;
+    String cardTime;
+
+    for(int i=0; i<size; i++) {
+      //iterate through course codes and card codes, adding to allControls
+      if (coursePointer < courseTimes.length) {
+        courseTime = courseTimes[coursePointer];
+        courseCode = courseCodes[coursePointer];
+      } else {
+        courseTime = "";
+        courseCode = -1;
+      }
+      if (cardPointer < extraTimes.size()) {
+        cardTime = extraTimes.get(cardPointer);
+      } else {
+        cardTime = "";
+      }
+
+      //'PM's will always go first
+      if(courseTime.equals("PM")) {
+        allControls[i][0] = String.valueOf(courseCode);
+        allControls[i][1] = courseTime;
+        allControls[i][2] = courseTime;
+        coursePointer++;
+      }
+      else {
+        if(courseTime.compareTo(cardTime) < 0 && courseCodes.length>coursePointer) { //time of course checkpoint is earlier than the checkpoint on the si card we're comparing to
+          allControls[i][0] = String.valueOf(courseCode);
+          allControls[i][1] = courseTime;
+          allControls[i][2] = "correct";
+          coursePointer++;
+        } else { //time of card checkpoint is earlier than the checkpoint on the course
+          allControls[i][0] = String.valueOf(extraCodes.get(cardPointer));
+          allControls[i][1] = extraTimes.get(cardPointer);
+          allControls[i][2] = "extra";
+          cardPointer++;
+        }
+      }
+      //debug print
+      //sSystem.out.println(allControls[i][0] + " : " + allControls[i][1] + " : " + allControls[i][2]);
+    }
+
+    for (int x=0; x<size; x++) {
+      System.out.println(allControls[x][0] + " : " + allControls[x][1] + " : " + allControls[x][2]);
+    }
+
+    return allControls;
   }
 
   public String toHtml()
@@ -308,11 +433,6 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
     retour.append("</table>");
     
     Vector<Integer> codesEnPlus = getCodesEnPlus();
-    /*
-     * how is codesEnPlus stored?
-     */
-    System.out.println(codesEnPlus);
-    System.out.println(getPuce().getPartiels().length);
 
     if(codesEnPlus.size()>0)
     {
@@ -323,6 +443,8 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
       }
       //retour.append("</font>");
     }
+
+    String[][] ordered = orderedControlsList();
     
     return retour.toString();
   }
