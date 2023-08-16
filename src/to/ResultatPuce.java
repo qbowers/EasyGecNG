@@ -408,9 +408,6 @@ public void filterExtra() {
 
     String[][] ordered = orderedControlsList();
 
-    System.out.println(ordered.length);
-
-
     for(int i=0; i<ordered.length; i++) {
       String designation = ordered[i][2];
       String color = "black";
@@ -421,45 +418,12 @@ public void filterExtra() {
       } else { //red text
         color = "red";
       }
-
+      //add html elements with the correct color
       retour.append("<font color=" + color);
       retour.append("<tr align=center><td>" + (i+1) + "</td><td><b>" + ordered[i][0] + "</b></td>");
       retour.append("<td>"+ordered[i][1]+"</td><td>----</td></tr>");
       retour.append("</font>");
-
     }
-    /*
-    {
-      if(okPm[i])
-      {
-        retour.append("<tr align=center><td>" + (i+1) + "</td><td><b>" + codesATrouver[i] + "</b></td>");
-        retour.append("<td>" + temps[i] + "</td><td>" + getPartiel(i) + "</td></tr>");
-      }
-      else
-      {
-        retour.append("<font color=red>");
-        retour.append("<tr align=center><td>" + (i+1) + "</td><td><b>" + codesATrouver[i] + "</b></td>");
-        retour.append("<td>PM</td><td>----</td></tr>");
-        retour.append("</font>");
-      }
-    }
-    retour.append("<tr align=center><td></td><td><b>A</b></td>");
-    retour.append("<td>" + TimeManager.fullTime(arrivee) + "</td><td>" + getPartiel(codesATrouver.length) + "</td></tr>");
-    retour.append("</table>");
-
-    Vector<Integer> codesEnPlus = getCodesEnPlus();
-
-    if(codesEnPlus.size()>0)
-    {
-      retour.append("<font size=1 color=blue><b>" + EasyGec.getLangages().getText("103", EasyGec.getLang()) + "</b><br>");
-      for(int i=0; i<codesEnPlus.size(); i++)
-      {
-        retour.append(codesEnPlus.get(i) + "<br>");
-      }
-      //retour.append("</font>");
-    }
-    */
-    
     return retour.toString();
   }
 
