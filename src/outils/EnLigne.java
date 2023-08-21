@@ -217,6 +217,9 @@ public class EnLigne
   {
     return temps;
   }
+
+  public Vector<Integer> getCardCodes() { return codesPuce;}
+  public Vector<String> getCardTimes() { return tempsPuce;}
   
   private boolean existeCode(int code, int index)
   { 

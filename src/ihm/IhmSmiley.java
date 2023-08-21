@@ -2,25 +2,23 @@ package ihm;
 
 import java.applet.Applet;
 import java.applet.AudioClip;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JButton;
-import java.awt.BorderLayout;
 import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JEditorPane;
+import javax.swing.text.PlainDocument;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import javafx.geometry.Pos;
 import metier.EasyGec;
 
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -39,7 +37,7 @@ public class IhmSmiley extends JDialog
   private boolean pause = false;
   private JButton btnNewButton;
   
-  public IhmSmiley(int missed, String temps, EasyGec easyGec)
+  public IhmSmiley(int numberMissed, String missedStr, String temps, String courseName, EasyGec easyGec)
   {
     setAlwaysOnTop(true);    
     setUndecorated(true);
@@ -72,13 +70,9 @@ public class IhmSmiley extends JDialog
     setSize(dimEcran.width, dimEcran.height);
     btnNewButton.setSize(dimEcran.height, dimEcran.height);
     
-    if(missed<1)
+    if(numberMissed<1)
     {
       icon = new ImageIcon(IhmSmiley.class.getResource("/icones/glassy-smiley-good-green.png"));
-    }
-    else if(missed==1)
-    {
-      icon = new ImageIcon(IhmSmiley.class.getResource("/icones/almost_there.png"));
     }
     else
     {
@@ -97,8 +91,7 @@ public class IhmSmiley extends JDialog
     lblTime.setFont(new Font("Tahoma", Font.PLAIN, 60));
     lblTime.setHorizontalAlignment(SwingConstants.CENTER);
     lblTime.setPreferredSize(new Dimension(14, 100));
-    getContentPane().add(lblTime, BorderLayout.EAST);
-    // getContentPane().add(lblTime, BorderLayout.SOUTH);
+    getContentPane().add(lblTime, BorderLayout.SOUTH);
 
     if(temps.compareTo("0:00:00")!=0)
     {
@@ -108,7 +101,23 @@ public class IhmSmiley extends JDialog
     {
       lblTime.setText("");
     }
-    reLoadPage(missed);
+
+    /*
+    JLabel lblMissed = new JLabel(missedStr);
+    lblMissed.setFont(new Font("Tahoma", Font.PLAIN, 60));
+    lblMissed.setHorizontalAlignment(SwingConstants.CENTER);
+    lblMissed.setPreferredSize(new Dimension(14, 100));
+    getContentPane().add(lblMissed, BorderLayout.NORTH);
+
+    if (numberMissed>0) {
+      lblMissed.setText("Missed checkpoints are: " + missedStr);
+    }
+    else {
+      lblMissed.setText("All checkpoints correct!");
+    }
+    */
+
+    reLoadPage(numberMissed, missedStr, courseName);
     this.setVisible(true);
     try
     {
@@ -127,25 +136,23 @@ public class IhmSmiley extends JDialog
   }
 
   
-  private void reLoadPage(int missed)
+  private void reLoadPage(int numberMissed, String missedStr, String courseName)
   {
     try
     {
-      editorPane.setDocument(new HTMLDocument());
-      String adresse = new File(".").getCanonicalPath().toString();
-      editorPane.setPage("file:///" + adresse + "/temp.html");
+      editorPane.setDocument(new PlainDocument());
+      Font currentFont = editorPane.getFont();
+      Font font = currentFont.deriveFont(48f);
+      editorPane.setFont(font);
+      editorPane.setText("Course:\n"+ courseName+ "\nMissed\nControls:\n" + missedStr);
     }
-    catch (IOException et)
+    catch (Exception et)
     {
       System.err.format("Impossible de charger la page", et.getMessage());
     }
-    if(missed<1)
+    if(numberMissed<1)
     {
       applause.play();
-    }
-    else if(missed==1)
-    {
-      encouragement.play();
     }
     else
     {

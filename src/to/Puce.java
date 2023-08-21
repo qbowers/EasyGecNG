@@ -136,8 +136,8 @@ public class Puce implements Cloneable
   {
     StringBuffer retour = new StringBuffer();
     
-    retour.append("Départ : "+TimeManager.fullTime(starttime)+", ");
-    retour.append("Arrivée : "+TimeManager.fullTime(finishtime)+", ");
+    retour.append("Dï¿½part : "+TimeManager.fullTime(starttime)+", ");
+    retour.append("Arrivï¿½e : "+TimeManager.fullTime(finishtime)+", ");
     
     return retour.toString();
   }
@@ -146,12 +146,12 @@ public class Puce implements Cloneable
   {
     StringBuffer retour = new StringBuffer();
 
-    retour.append("Départ : "+TimeManager.fullTime(starttime)+"\n");
+    retour.append("Dï¿½part : "+TimeManager.fullTime(starttime)+"\n");
     for(int i = 0; i<partiels.length; i++)
     {
       retour.append(partiels[i].toString());
     }
-    retour.append("Arrivée : "+TimeManager.fullTime(finishtime));
+    retour.append("Arrivï¿½e : "+TimeManager.fullTime(finishtime));
 
     return retour.toString();
   }
@@ -219,7 +219,7 @@ public class Puce implements Cloneable
     return retour;
   }
   
-  // on récupère le partiel du deuxième code trouvé
+  // on rï¿½cupï¿½re le partiel du deuxiï¿½me code trouvï¿½
   public Date getTimePartielLastCode(int code)
   {
     Date retour = TimeManager.NO_TIME;
