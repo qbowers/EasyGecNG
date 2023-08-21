@@ -135,7 +135,7 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
     public String getPartiel(int index)
     {
         String retour = "----";
-        if(index==0)
+        if(index==0) //gets split between start and first control
         {
             if(okPm.length>0 && okPm[0] && depart>-1)
             {
@@ -153,7 +153,7 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
         {
             if(okPm[index] && okPm[index-1])
             {
-                retour = TimeManager.fullTime(TimeManager.toLong(TimeManager.safeParse(temps[index])) - TimeManager.toLong(TimeManager.safeParse(temps[index - 1])));
+                retour = TimeManager.fullTime(TimeManager.toLong(TimeManager.safeParse(temps[index])) - TimeManager.toLong(TimeManager.safeParse(temps[index-1])));
             }
         }
         if(retour.substring(0, 1).compareTo("-")==0)
@@ -416,28 +416,30 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
         String[][] ordered = orderedControlsList();
         int j=0;
         String partiel = "----";
+        int index = 1;
 
         for(int i=0; i<ordered.length; i++) {
             String designation = ordered[i][2];
-            String color = "black";
-            if(designation.equals("correct")) { //plain text
-                color = "black";
-                partiel = getPartiel(j);
-                //debug print
-                //System.out.println(partiel);
-                j++;
-            } else if(!designation.equals("PM")) { //"extra" - blue text
-                color = "blue";
-            } else { //red text
-                color = "red";
-                partiel = "----";
-                j++;
-            }
             //add html elements with the correct color
-            retour.append("<font color=" + color);
-            retour.append("<tr align=center><td>" + (i+1) + "</td><td><b>" + ordered[i][0] + "</b></td>");
-            retour.append("<td>"+ordered[i][1]+"</td><td>"+ partiel +"</td></tr>");
-            retour.append("</font>");
+            if(designation.equals("correct")) { //correct - plain text
+                retour.append("<font color=black");
+                retour.append("<tr align=center><td>" + (index) + "</td><td><b>" + ordered[i][0] + "</b></td>");
+                retour.append("<td>"+ordered[i][1]+"</td><td>"+ getPartiel(index-1) +"</td></tr>");
+                retour.append("</font>");
+                index++;
+            } else if(!designation.equals("PM")) { //extra punch - blue text
+                retour.append("<font color=blue");
+                retour.append("<tr align=center><td>" + " " + "</td><td><b>" + ordered[i][0] + "</b></td>");
+                retour.append("<td>"+ordered[i][1]+"</td><td>"+ "----" +"</td></tr>");
+                retour.append("</font>");
+            } else { //missed punch - red text
+                retour.append("<font color=red");
+                retour.append("<tr align=center><td>" + (index) + "</td><td><b>" + ordered[i][0] + "</b></td>");
+                retour.append("<td>"+ordered[i][1]+"</td><td>"+ "----" +"</td></tr>");
+                retour.append("</font>");
+                index++;
+            }
+
         }
         retour.append("<tr align=center><td></td><td><b>A</b></td>");
         retour.append("<td>" + TimeManager.fullTime(arrivee) + "</td><td>" + getPartiel(codesATrouver.length) + "</td></tr>");
