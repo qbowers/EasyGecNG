@@ -144,7 +144,7 @@ public class IhmSmiley extends JDialog
       Font currentFont = editorPane.getFont();
       Font font = currentFont.deriveFont(48f);
       editorPane.setFont(font);
-      editorPane.setText("Course:\n"+ courseName+ "\nMissed\nControls:\n" + missedStr);
+      editorPane.setText(courseName+ "\n________\nMissed\nControls:\n" + missedStr);
     }
     catch (Exception et)
     {
