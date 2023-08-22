@@ -77,7 +77,7 @@ public class IhmResultatPuce extends JDialog
     setTitle(EasyGec.getLangages().getText("90", EasyGec.getLang()));
     setIconImage(Toolkit.getDefaultToolkit().getImage(IhmResultatPuce.class.getResource("/icones/easy.png")));
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    setBounds(100, 100, 327, 542);
+    setBounds(100, 100, 450, 542);
     contentPane = new JPanel();
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     contentPane.setLayout(new BorderLayout(0, 0));
@@ -188,8 +188,8 @@ public class IhmResultatPuce extends JDialog
     panel_2.add(lblIdentifiant);
     
     textFieldIdentifiant = new JTextField();
-    textFieldIdentifiant.setMinimumSize(new Dimension(150, 20));
-    textFieldIdentifiant.setPreferredSize(new Dimension(150, 20));
+    textFieldIdentifiant.setMinimumSize(new Dimension(273, 20));
+    textFieldIdentifiant.setPreferredSize(new Dimension(273, 20));
     panel_2.add(textFieldIdentifiant);
     textFieldIdentifiant.setColumns(18);
 
@@ -217,13 +217,14 @@ public class IhmResultatPuce extends JDialog
         }
       }
     });
-    comboBoxCircuits.setPreferredSize(new Dimension(175, 20));
+    comboBoxCircuits.setPreferredSize(new Dimension(248, 20));
     panel_3.add(comboBoxCircuits);
     
     JPanel panel_4 = new JPanel();
     FlowLayout flowLayout_1 = (FlowLayout) panel_4.getLayout();
     flowLayout_1.setAlignment(FlowLayout.LEFT);
-    panel_4.setPreferredSize(new Dimension(230, 400));
+    panel_4.setPreferredSize(new Dimension(353, 400));
+    //panel_4.setSize(220, 350);
     panel_1.add(panel_4);
     
     btnReload = new JButton("");
@@ -244,7 +245,8 @@ public class IhmResultatPuce extends JDialog
     
     editorPane = new JEditorPane();
     editorPane.setEditable(false);
-    editorPane.setPreferredSize(new Dimension(220, 350));
+    editorPane.setPreferredSize(new Dimension(343, 350));
+    //editorPane.setSize(220, 350);
     
     JScrollPane scrollPane = new JScrollPane();
     scrollPane.setViewportView(editorPane);

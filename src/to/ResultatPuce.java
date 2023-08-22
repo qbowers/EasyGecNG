@@ -382,14 +382,13 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
             //System.out.println(partiel);
         }
 
-
-
         calculOkPm();
         depart = 0;
-        StringBuffer retour = new StringBuffer();
+        StringBuilder retour = new StringBuilder(1000);
+
         // Identification
-        retour.append("<b>" + EasyGec.getLangages().getText("96", EasyGec.getLang()) + "</b> " + getIdentifiant() + "<br>");
-        retour.append("<b>" + EasyGec.getLangages().getText("97", EasyGec.getLang()) + "</b> " + getCircuit().getNom() + "");
+        retour.append("<b style='font-size: 15px'>" + EasyGec.getLangages().getText("96", EasyGec.getLang()) + "</b><span style='font-size: 15px'> " + getIdentifiant() + "</span><br>");
+        retour.append("<b style='font-size: 15px'>" + EasyGec.getLangages().getText("97", EasyGec.getLang()) + "</b><span style='font-size: 15px'> " + getCircuit().getNom() + "</span>");
 
         //  R�sultats globaux de l'�tape
         //retour.append("<br>");
@@ -403,11 +402,11 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
             depart = circuit.getHeureDepart().getTime();
         }
         arrivee = getPuce().getFinishtime().getTime();
-        retour.append("<b>" + EasyGec.getLangages().getText("99", EasyGec.getLang()) + "</b> ");
-        retour.append(TimeManager.fullTime(arrivee - depart) + "<br>");
-        retour.append("<table><tr align=center><th></th><th>" + EasyGec.getLangages().getText("100", EasyGec.getLang()) + "</th><th>" + EasyGec.getLangages().getText("101", EasyGec.getLang()) + "</th><th>" + EasyGec.getLangages().getText("102", EasyGec.getLang()) + "</th></tr>");
-        retour.append("<tr align=center><td></td><td><b>D</b></td>");
-        retour.append("<td>" + TimeManager.fullTime(depart) + "</td><td></td></tr>");
+        retour.append("<b style='font-size: 15px'>" + EasyGec.getLangages().getText("99", EasyGec.getLang()) + "</b> ");
+        retour.append("<span style='font-size: 15px'>" +TimeManager.fullTime(arrivee - depart) + "</span><br>");
+        retour.append("<table><tr align=center><th></th><th style='font-size: 15px'>" + EasyGec.getLangages().getText("100", EasyGec.getLang()) + "</th><th style='font-size: 15px'>" + EasyGec.getLangages().getText("101", EasyGec.getLang()) + "</th><th style='font-size: 15px'>" + EasyGec.getLangages().getText("102", EasyGec.getLang()) + "</th></tr>");
+        retour.append("<tr align=center><td></td><td><b style='font-size: 15px'>D</b></td>");
+        retour.append("<td style='font-size: 15px'>" + TimeManager.fullTime(depart) + "</td><td></td></tr>");
         if(!circuit.isEnLigne())
         {
             triResultatsScore();
@@ -422,27 +421,33 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
             String designation = ordered[i][2];
             //add html elements with the correct color
             if(designation.equals("correct")) { //correct - plain text
-                retour.append("<font color=black");
-                retour.append("<tr align=center><td>" + (index) + "</td><td><b>" + ordered[i][0] + "</b></td>");
-                retour.append("<td>"+ordered[i][1]+"</td><td>"+ getPartiel(index-1) +"</td></tr>");
-                retour.append("</font>");
+                retour.append("<tr align=center color=black>" +
+                        "<td style='font-size: 15px'>" + (index) + "</td>" +
+                        "<td style='font-size: 15px'><b>" + ordered[i][0] + "</b></td>" +
+                        "<td style='font-size: 15px'>"+ordered[i][1]+"</td>" +
+                        "<td style='font-size: 15px'>"+ getPartiel(index-1) +"</td>" +
+                        "</tr>");
                 index++;
             } else if(!designation.equals("PM")) { //extra punch - blue text
-                retour.append("<font color=blue");
-                retour.append("<tr align=center><td>" + " " + "</td><td><b>" + ordered[i][0] + "</b></td>");
-                retour.append("<td>"+ordered[i][1]+"</td><td>"+ "----" +"</td></tr>");
-                retour.append("</font>");
+                retour.append("<tr align=center color=blue>" +
+                        "<td style='font-size: 15px'>" + " " + "</td>" +
+                        "<td style='font-size: 15px'><b>" + ordered[i][0] + "</b></td>" +
+                        "<td style='font-size: 15px'>"+ordered[i][1]+"</td>" +
+                        "<td style='font-size: 15px'>"+ "----" +"</td>" +
+                        "</tr>");
             } else { //missed punch - red text
-                retour.append("<font color=red");
-                retour.append("<tr align=center><td>" + (index) + "</td><td><b>" + ordered[i][0] + "</b></td>");
-                retour.append("<td>"+ordered[i][1]+"</td><td>"+ "----" +"</td></tr>");
-                retour.append("</font>");
+                retour.append("<tr align=center color=red>" +
+                        "<td style='font-size: 15px'>" + (index) + "</td>" +
+                        "<td style='font-size: 15px'><b>" + ordered[i][0] + "</b></td>" +
+                        "<td style='font-size: 15px'>"+ordered[i][1]+"</td>" +
+                        "<td style='font-size: 15px'>"+ "----" +"</td>" +
+                        "</tr>");
                 index++;
             }
 
         }
-        retour.append("<tr align=center><td></td><td><b>A</b></td>");
-        retour.append("<td>" + TimeManager.fullTime(arrivee) + "</td><td>" + getPartiel(codesATrouver.length) + "</td></tr>");
+        retour.append("<tr align=center><td></td><td><b style='font-size: 15px'>A</b></td>");
+        retour.append("<td style='font-size: 15px'>" + TimeManager.fullTime(arrivee) + "</td><td style='font-size: 15px'>" + getPartiel(codesATrouver.length) + "</td></tr>");
         retour.append("</table>");
 
         return retour.toString();
