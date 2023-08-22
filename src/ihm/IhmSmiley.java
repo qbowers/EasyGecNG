@@ -85,7 +85,11 @@ public class IhmSmiley extends JDialog
     
     editorPane = new JEditorPane();
     editorPane.setPreferredSize(new Dimension(220, 20));
+
+    //only render missed controls list if the course is incomplete
+    if(missedStr.length()>0) {
     getContentPane().add(editorPane, BorderLayout.WEST);
+  }
     
     JLabel lblTime = new JLabel("PM");
     lblTime.setFont(new Font("Tahoma", Font.PLAIN, 60));
