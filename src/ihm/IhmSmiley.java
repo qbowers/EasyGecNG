@@ -47,23 +47,23 @@ public class IhmSmiley extends JDialog
    */
   public IhmSmiley(int numberMissed, String missedStr, String temps, String courseName, EasyGec easyGec, int okCourse)
   {
-    setAlwaysOnTop(true);    
+    setAlwaysOnTop(true);
     setUndecorated(true);
-    
+
     btnNewButton = new JButton("");
-    btnNewButton.addMouseListener(new MouseAdapter() 
+    btnNewButton.addMouseListener(new MouseAdapter()
     {
       @Override
-      public void mouseClicked(MouseEvent e) 
+      public void mouseClicked(MouseEvent e)
       {
         if(!pause)
         {
           pause = true;
           icon = new ImageIcon(IhmSmiley.class.getResource("/icones/pause.png"));
-        
+
           Image img = icon.getImage();
           Image newimg = img.getScaledInstance(btnNewButton.getSize().height, btnNewButton.getSize().height, java.awt.Image.SCALE_SMOOTH);
-          icon = new ImageIcon(newimg);  
+          icon = new ImageIcon(newimg);
           btnNewButton.setIcon(icon);
         }
         else
@@ -77,14 +77,21 @@ public class IhmSmiley extends JDialog
 
     setSize(dimEcran.width, dimEcran.height);
     btnNewButton.setSize(dimEcran.height, dimEcran.height);
-    
-    if(numberMissed<1)
-    {
-      icon = new ImageIcon(IhmSmiley.class.getResource("/icones/glassy-smiley-good-green.png"));
+    if(okCourse==0){
+      if(numberMissed<1)
+      {
+        icon = new ImageIcon(IhmSmiley.class.getResource("/icones/glassy-smiley-good-green.png"));
+      }
+      else
+      {
+        //https://freesvg.org/vector-image-of-purple-dazed-smiley
+        icon = new ImageIcon(IhmSmiley.class.getResource("/icones/glassy-smiley-surprised.png"));
+      }
     }
     else
-    {
-      icon = new ImageIcon(IhmSmiley.class.getResource("/icones/glassy-smiley-bad.png"));
+    { //missed start or finish
+      //https://freesvg.org/yellow-smiley-with-neutral-face-illustration
+      icon = new ImageIcon(IhmSmiley.class.getResource("/icones/glassy-smiley-late.png"));
     }
     Image img = icon.getImage();
     Image newimg = img.getScaledInstance(btnNewButton.getSize().width, btnNewButton.getSize().height, java.awt.Image.SCALE_SMOOTH);
@@ -95,7 +102,7 @@ public class IhmSmiley extends JDialog
     editorPane.setPreferredSize(new Dimension(220, 20));
 
     //only render missed controls list if the course is incomplete
-    if(missedStr.length()>0) {
+    if(missedStr.length()>0 && okCourse==0) {
     getContentPane().add(editorPane, BorderLayout.WEST);
   }
     
@@ -105,13 +112,24 @@ public class IhmSmiley extends JDialog
     lblTime.setPreferredSize(new Dimension(14, 100));
     getContentPane().add(lblTime, BorderLayout.SOUTH);
 
-    if(temps.compareTo("0:00:00")!=0)
-    {
-      lblTime.setText(temps);
+    //Set South label
+    if(okCourse==1)
+    { //missed start
+      lblTime.setText("Missed Start Control");
     }
-    else
-    {
-      lblTime.setText("");
+    else if(okCourse==2)
+    { //missed finish
+      lblTime.setText("Missed Finish Control");
+    }
+    else {
+      if(temps.compareTo("0:00:00")!=0)
+      {
+        lblTime.setText(temps);
+      }
+      else
+      {
+        lblTime.setText("");
+      }
     }
 
     reLoadPage(numberMissed, missedStr, courseName);
