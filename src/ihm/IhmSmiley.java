@@ -36,7 +36,15 @@ public class IhmSmiley extends JDialog
   private JEditorPane editorPane;
   private boolean pause = false;
   private JButton btnNewButton;
-  
+
+  /**
+   *
+   * @param numberMissed integer of how many checkpoints a participant missed on the guessed course
+   * @param missedStr string representation, \n-separated, of missed checkpoints for the graphic to display. Rendered in editorPane in reloadPage()
+   * @param temps elapsed time, rendered at the bottom of the screen in 'lblTime'
+   * @param courseName course name (string), rendered in editorPane in reloadPage()
+   * @param easyGec instance of EasyGec, used for how long to delay the screen
+   */
   public IhmSmiley(int numberMissed, String missedStr, String temps, String courseName, EasyGec easyGec)
   {
     setAlwaysOnTop(true);    
@@ -105,21 +113,6 @@ public class IhmSmiley extends JDialog
     {
       lblTime.setText("");
     }
-
-    /*
-    JLabel lblMissed = new JLabel(missedStr);
-    lblMissed.setFont(new Font("Tahoma", Font.PLAIN, 60));
-    lblMissed.setHorizontalAlignment(SwingConstants.CENTER);
-    lblMissed.setPreferredSize(new Dimension(14, 100));
-    getContentPane().add(lblMissed, BorderLayout.NORTH);
-
-    if (numberMissed>0) {
-      lblMissed.setText("Missed checkpoints are: " + missedStr);
-    }
-    else {
-      lblMissed.setText("All checkpoints correct!");
-    }
-    */
 
     reLoadPage(numberMissed, missedStr, courseName);
     this.setVisible(true);
