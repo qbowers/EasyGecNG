@@ -38,14 +38,14 @@ public class IhmSmiley extends JDialog
   private JButton btnNewButton;
 
   /**
-   *
    * @param numberMissed integer of how many checkpoints a participant missed on the guessed course
    * @param missedStr string representation, \n-separated, of missed checkpoints for the graphic to display. Rendered in editorPane in reloadPage()
    * @param temps elapsed time, rendered at the bottom of the screen in 'lblTime'
    * @param courseName course name (string), rendered in editorPane in reloadPage()
    * @param easyGec instance of EasyGec, used for how long to delay the screen
+   * @param okCourse tells this class if the finish
    */
-  public IhmSmiley(int numberMissed, String missedStr, String temps, String courseName, EasyGec easyGec)
+  public IhmSmiley(int numberMissed, String missedStr, String temps, String courseName, EasyGec easyGec, String okCourse)
   {
     setAlwaysOnTop(true);    
     setUndecorated(true);
