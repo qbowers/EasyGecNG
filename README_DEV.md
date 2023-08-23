@@ -14,6 +14,10 @@
 - Use simple Java to make it easier to read (POJO or close)
 - Swing UI
 
+EasyGec is dependent on an older version of Java, 1.8 (i.e., 8). There may even be a requirement for a specific 1.8 version.
+We do not yet know what forces this dependency. We would like the code to be able to work with more recent Java
+versions, to avoid having to install an older JRE in order to run the program.
+
 ### Libraries
 
 Minimize use to keep it simple.
