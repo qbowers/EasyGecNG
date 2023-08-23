@@ -285,7 +285,13 @@ public class IhmResultatPuce extends JDialog
       System.out.println("start: " + start);
       System.out.println("finish: " + finish);
       //make a local variable to pass to IhmSmiley
-      String okCourse = "ok";
+      int okCourse = 0;
+      if(start==-1) { //missed start control
+        okCourse = 1;
+      }
+      if(finish==-1) { //missed finish control
+        okCourse = 2;
+      }
 
       if(min == 0)
       {

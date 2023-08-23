@@ -45,7 +45,7 @@ public class IhmSmiley extends JDialog
    * @param easyGec instance of EasyGec, used for how long to delay the screen
    * @param okCourse tells this class if the finish or start is missing
    */
-  public IhmSmiley(int numberMissed, String missedStr, String temps, String courseName, EasyGec easyGec, String okCourse)
+  public IhmSmiley(int numberMissed, String missedStr, String temps, String courseName, EasyGec easyGec, int okCourse)
   {
     setAlwaysOnTop(true);    
     setUndecorated(true);
