@@ -43,7 +43,7 @@ public class IhmSmiley extends JDialog
    * @param temps elapsed time, rendered at the bottom of the screen in 'lblTime'
    * @param courseName course name (string), rendered in editorPane in reloadPage()
    * @param easyGec instance of EasyGec, used for how long to delay the screen
-   * @param okCourse tells this class if the finish
+   * @param okCourse tells this class if the finish or start is missing
    */
   public IhmSmiley(int numberMissed, String missedStr, String temps, String courseName, EasyGec easyGec, String okCourse)
   {
