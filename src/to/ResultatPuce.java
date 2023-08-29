@@ -666,4 +666,13 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
             return "";
         }
     }
+
+    public long getStart() {
+        return depart;
+    }
+
+    public long getFinish() {
+        return arrivee;
+    }
+
 }

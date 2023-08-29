@@ -36,26 +36,34 @@ public class IhmSmiley extends JDialog
   private JEditorPane editorPane;
   private boolean pause = false;
   private JButton btnNewButton;
-  
-  public IhmSmiley(int numberMissed, String missedStr, String temps, String courseName, EasyGec easyGec)
+
+  /**
+   * @param numberMissed integer of how many checkpoints a participant missed on the guessed course
+   * @param missedStr string representation, \n-separated, of missed checkpoints for the graphic to display. Rendered in editorPane in reloadPage()
+   * @param temps elapsed time, rendered at the bottom of the screen in 'lblTime'
+   * @param courseName course name (string), rendered in editorPane in reloadPage()
+   * @param easyGec instance of EasyGec, used for how long to delay the screen
+   * @param okCourse tells this class if the finish or start is missing
+   */
+  public IhmSmiley(int numberMissed, String missedStr, String temps, String courseName, EasyGec easyGec, int okCourse)
   {
-    setAlwaysOnTop(true);    
+    setAlwaysOnTop(true);
     setUndecorated(true);
-    
+
     btnNewButton = new JButton("");
-    btnNewButton.addMouseListener(new MouseAdapter() 
+    btnNewButton.addMouseListener(new MouseAdapter()
     {
       @Override
-      public void mouseClicked(MouseEvent e) 
+      public void mouseClicked(MouseEvent e)
       {
         if(!pause)
         {
           pause = true;
           icon = new ImageIcon(IhmSmiley.class.getResource("/icones/pause.png"));
-        
+
           Image img = icon.getImage();
           Image newimg = img.getScaledInstance(btnNewButton.getSize().height, btnNewButton.getSize().height, java.awt.Image.SCALE_SMOOTH);
-          icon = new ImageIcon(newimg);  
+          icon = new ImageIcon(newimg);
           btnNewButton.setIcon(icon);
         }
         else
@@ -69,14 +77,21 @@ public class IhmSmiley extends JDialog
 
     setSize(dimEcran.width, dimEcran.height);
     btnNewButton.setSize(dimEcran.height, dimEcran.height);
-    
-    if(numberMissed<1)
-    {
-      icon = new ImageIcon(IhmSmiley.class.getResource("/icones/glassy-smiley-good-green.png"));
+    if(okCourse==0){
+      if(numberMissed<1)
+      {
+        icon = new ImageIcon(IhmSmiley.class.getResource("/icones/glassy-smiley-good-green.png"));
+      }
+      else
+      {
+        //https://freesvg.org/vector-image-of-purple-dazed-smiley
+        icon = new ImageIcon(IhmSmiley.class.getResource("/icones/glassy-smiley-surprised.png"));
+      }
     }
     else
-    {
-      icon = new ImageIcon(IhmSmiley.class.getResource("/icones/glassy-smiley-bad.png"));
+    { //missed start or finish
+      //https://freesvg.org/yellow-smiley-with-neutral-face-illustration
+      icon = new ImageIcon(IhmSmiley.class.getResource("/icones/glassy-smiley-late.png"));
     }
     Image img = icon.getImage();
     Image newimg = img.getScaledInstance(btnNewButton.getSize().width, btnNewButton.getSize().height, java.awt.Image.SCALE_SMOOTH);
@@ -87,7 +102,7 @@ public class IhmSmiley extends JDialog
     editorPane.setPreferredSize(new Dimension(220, 20));
 
     //only render missed controls list if the course is incomplete
-    if(missedStr.length()>0) {
+    if(missedStr.length()>0 && okCourse==0) {
     getContentPane().add(editorPane, BorderLayout.WEST);
   }
     
@@ -97,29 +112,25 @@ public class IhmSmiley extends JDialog
     lblTime.setPreferredSize(new Dimension(14, 100));
     getContentPane().add(lblTime, BorderLayout.SOUTH);
 
-    if(temps.compareTo("0:00:00")!=0)
-    {
-      lblTime.setText(temps);
+    //Set South label
+    if(okCourse==1)
+    { //missed start
+      lblTime.setText("Missed Start Control");
     }
-    else
-    {
-      lblTime.setText("");
-    }
-
-    /*
-    JLabel lblMissed = new JLabel(missedStr);
-    lblMissed.setFont(new Font("Tahoma", Font.PLAIN, 60));
-    lblMissed.setHorizontalAlignment(SwingConstants.CENTER);
-    lblMissed.setPreferredSize(new Dimension(14, 100));
-    getContentPane().add(lblMissed, BorderLayout.NORTH);
-
-    if (numberMissed>0) {
-      lblMissed.setText("Missed checkpoints are: " + missedStr);
+    else if(okCourse==2)
+    { //missed finish
+      lblTime.setText("Missed Finish Control");
     }
     else {
-      lblMissed.setText("All checkpoints correct!");
+      if(temps.compareTo("0:00:00")!=0)
+      {
+        lblTime.setText(temps);
+      }
+      else
+      {
+        lblTime.setText("");
+      }
     }
-    */
 
     reLoadPage(numberMissed, missedStr, courseName);
     this.setVisible(true);
