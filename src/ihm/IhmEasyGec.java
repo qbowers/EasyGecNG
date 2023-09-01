@@ -153,7 +153,8 @@ public class IhmEasyGec extends JFrame
   private JButton buttonUnss;
 
   /**
-   * Launch the application.
+   * Launch the application - this is the main class
+   * It creates a multitude of GUI elements and organizes the structure of the UI
    */
   public static void main(String[] args)
   {
@@ -162,7 +163,7 @@ public class IhmEasyGec extends JFrame
     {
       public void run()
       {
-        // On récupère le Look courant et on l'applique à notre application
+        // On rï¿½cupï¿½re le Look courant et on l'applique ï¿½ notre application
         try{ UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() ); }
         catch( Exception e ) {}
         
@@ -701,7 +702,7 @@ public class IhmEasyGec extends JFrame
         chooser.setCurrentDirectory(new File(easyGec.getRepertoire()));
         
         int returnVal = chooser.showOpenDialog(IhmEasyGec.this);
-        // Si un fichier a été choisi
+        // Si un fichier a ï¿½tï¿½ choisi
         if(returnVal == JFileChooser.APPROVE_OPTION) 
         {
           easyGec.getOrienteurs().getOrienteurs().clear();
@@ -834,7 +835,7 @@ public class IhmEasyGec extends JFrame
         chooser.setCurrentDirectory(new File(easyGec.getRepertoire()));
         
         int returnVal = chooser.showOpenDialog(IhmEasyGec.this);
-        // Si un fichier a été choisi
+        // Si un fichier a ï¿½tï¿½ choisi
         if(returnVal == JFileChooser.APPROVE_OPTION) 
         {
           easyGec.clear();
@@ -865,7 +866,7 @@ public class IhmEasyGec extends JFrame
       {
         if(easyGec.getFichier().compareTo("") == 0)
         {
-          // On ouvre le navigateur sur le répertoire par défaut
+          // On ouvre le navigateur sur le rï¿½pertoire par dï¿½faut
           JFileChooser chooser = new JFileChooser();
           FiltreFichier filter = new FiltreFichier();
           filter.addExtension("egc");
@@ -874,7 +875,7 @@ public class IhmEasyGec extends JFrame
           chooser.setCurrentDirectory(new File(easyGec.getRepertoire()));
           
           int returnVal = chooser.showSaveDialog(IhmEasyGec.this);
-          // Si un fichier a été choisi
+          // Si un fichier a ï¿½tï¿½ choisi
           if(returnVal == JFileChooser.APPROVE_OPTION) 
           {
             easyGec.setFichier((Outils.verifExtension(chooser.getSelectedFile().getAbsolutePath(), ".egc")));
@@ -910,7 +911,7 @@ public class IhmEasyGec extends JFrame
         chooser.setCurrentDirectory(new File(easyGec.getRepertoire()));
         
         int returnVal = chooser.showOpenDialog(IhmEasyGec.this);
-        // Si un fichier a été choisi
+        // Si un fichier a ï¿½tï¿½ choisi
         if(returnVal == JFileChooser.APPROVE_OPTION) 
         {
           String fichier = chooser.getSelectedFile().getAbsolutePath();
@@ -972,7 +973,7 @@ public class IhmEasyGec extends JFrame
         chooser.setCurrentDirectory(new File(easyGec.getRepertoire()));
         
         int returnVal = chooser.showOpenDialog(IhmEasyGec.this);
-        // Si un fichier a été choisi
+        // Si un fichier a ï¿½tï¿½ choisi
         if(returnVal == JFileChooser.APPROVE_OPTION) 
         {
           String fichier = chooser.getSelectedFile().getAbsolutePath();
@@ -1152,7 +1153,7 @@ public class IhmEasyGec extends JFrame
     {
       public void actionPerformed(ActionEvent e) 
       {
-        JOptionPane.showMessageDialog(IhmEasyGec.this, EasyGec.getLangages().getText("57", EasyGec.getLang()) + "\nDéveloppeur : Thierry PORRET.\nTraducteurs : Robert MARIQUE, Michael HOCK et Luc CLOOSTERMANS.");
+        JOptionPane.showMessageDialog(IhmEasyGec.this, EasyGec.getLangages().getText("57", EasyGec.getLang()) + "\nDï¿½veloppeur : Thierry PORRET.\nTraducteurs : Robert MARIQUE, Michael HOCK et Luc CLOOSTERMANS.");
       }
     });
     btnInfo.setToolTipText("Afficher la boite d'information.");
