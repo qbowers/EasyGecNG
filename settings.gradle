@@ -10,6 +10,7 @@
 rootProject.name = 'EasyGecNG'
 include('app')
 
+// Reference to internal GecoSI code
 sourceControl {
     gitRepository("https://github.com/qbowers/GecoSI") {
         producesModule("net.gecosi:lib")
