@@ -50,7 +50,8 @@ dependencies {
 sourceSets {
     main {
         java {
-            srcDir '../depend/GecoSI/src'
+            srcDir '../depend/GecoSI/src/de'
+            srcDir '../depend/GecoSI/src/net'
         }
     }
 }
