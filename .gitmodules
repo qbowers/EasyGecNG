@@ -1,5 +1,0 @@
-[submodule "depend/GecoSI"]
-	path = depend/GecoSI
-	url = https://github.com/sdenier/GecoSI
-[submodule "GecoSI"]
-	url = https://github.com/qbowers/GecoSI

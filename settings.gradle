@@ -9,3 +9,9 @@
 
 rootProject.name = 'EasyGecNG'
 include('app')
+
+sourceControl {
+    gitRepository("https://github.com/qbowers/GecoSI") {
+        producesModule("net.gecosi:lib")
+    }
+}

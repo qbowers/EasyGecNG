@@ -42,18 +42,8 @@ dependencies {
     implementation 'jdom:jdom:1.+'
     implementation 'junit:junit:4.13'
     implementation 'org.mockito:mockito-core:1.9.+'
-}
-
-
-
-// Add GecoSI as a source. TODO: Remove git submodule and use Gradle Source Dependencies (https://blog.gradle.org/introducing-source-dependencies)
-sourceSets {
-    main {
-        java {
-            srcDir '../depend/GecoSI/src/de'
-            srcDir '../depend/GecoSI/src/net'
-        }
-    }
+    
+    implementation 'net.gecosi:lib:1.+'
 }
 
 application {
