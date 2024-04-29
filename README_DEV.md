@@ -1,60 +1,65 @@
-# EasyGecNG - Development Guidelines
+# Developer Installation
+### 1. Install Dependencies
+You must have java8 installed.
+- `jdk8-openjdk8` on linux/mac
+- download from [here](https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html) if on windows
 
-## Tools
+### 2. Clone the repository
+`git clone git@github.com:qbowers/EasyGecNG.git`
 
-- A Java IDE such as IntelliJ or Eclipse
-- Release builder - we have not successfully set this up yet (Ant or Gradle)
-- Git for source control; repo is on github
-- Javadoc for documentation generation (aspirational; not used yet)
+### 3. Test build
+`./gradlew build`
 
-## Project
+### 4. Run the App
+`./gradlew run`
 
-### Language/SDK
+### 5. That's it!
+run `./gradlew tasks` to list available tasks, including running unit tests and building an output jar. Modify available tasks in `app/build.gradle`
 
-- Use simple Java to make it easier to read (POJO or close)
-- Swing UI
+## IDE integration
 
-EasyGec is dependent on an older version of Java, 1.8 (i.e., 8). There may even be a requirement for a specific 1.8 version.
-We do not yet know what forces this dependency. We would like the code to be able to work with more recent Java
-versions, to avoid having to install an older JRE in order to run the program.
+### VSCode
+Simply open the correct folder in the editor. Build/run/degub from terminal, or use the following extensions to get Gradle UI buttons:
+- [Language Support for Java(TM) by Red Hat](https://open-vsx.org/extension/redhat/java)
+- [Gradle for Java](https://open-vsx.org/extension/vscjava/vscode-gradle)
+- If you're on the Microsoft-ified version of VSCode, try [this extension pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
 
-### Libraries
+### IntelliJ
+1. Use the "New Project > Get from VCS" button. Put in the url of this git repo.
+2. A popup stating "gradle build scripts found." Click `Load Gradle Project`
+3. A menu should appear with the available Gradle tasks Double click `EasyGecNG > Tasks > application > run`
+4. That's it!
 
-Minimize use to keep it simple.
+## Generating Documentation
+TODO :)
+We will use Javadoc
 
-- GecoSI (include RXTX) for SPORTident communication
-- ...
+## Generating Releases
+TODO :)
 
+### CI/CD
+- main branch is always releasable.
+- stable releases (the archive bundle with runnable jar, doc, other files...) are built and tagged from time to time from main.
+- in the future, we'd like any push to the repository to trigger an automated build, which compile the code and runs tests. This would be implemented with something like GitHub Actions or Travis.
+
+### Manually greating a Release
+We need to figure out how to do this. The bundle would ideally include:
+- help or doc folder with user documentation
+- a jar for development version (???)
+- a jar for stable release
+- a distribution bundle including jar, user doc, and other files
+
+
+# Development Guidelines
 ### Good Practices
-
 - We should be using test-drive development, but we haven't figured out how to do that yet.
 - Documentation should be provided using javadoc comments on classes and methods.
 
-## Workflows
-
-### Development
-
-- fork the project
-- make your changes
-- make a pull request
-- go through the review process
-- your changes will be merged into the main repository after a successful review
-
-### Continuous release
-
-- main branch is always releasable.
-- stable releases (the archive bundle with runnable jar, doc, other files...) are built and tagged from time to time from main.
-- development happens in parallel branches, which are merged into main when finished. 
-- in the future, we'd like any push to the repository to trigger an automated build, which compile the code and runs tests. 
-  This would be implemented with something like GitHub Actions or Travis.
-
-### Create a release bundle
-
-We need to figure out how to do this. The NG developers switched to Intellij from Eclipse on the recommendation of 
-an advisor. We were thinking to use Gradle but there are examples of GecoSI-dependent software that use Ant that 
-we might emulate. The bundle would ideally include:
-
-- help or doc folder with user documentation
-- a jar for development version
-- a jar for stable release
-- a distribution bundle including jar, user doc, and other files
+### Dependencies
+These are managed automatically by Gradle, but also enumerated here. TODO: Licensing
+- jSerialComm
+- jDom
+- jUnit4
+- Mockito-core
+- [GecoSI](https://github.com/qbowers/GecoSI)
+  - jSerialComm
