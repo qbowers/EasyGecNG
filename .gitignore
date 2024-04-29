@@ -37,3 +37,6 @@ temp.html
 
 # Ignore Gradle build output directory
 build
+
+# Generated files
+config.xml
