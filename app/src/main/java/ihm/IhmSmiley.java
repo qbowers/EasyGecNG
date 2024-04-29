@@ -7,16 +7,12 @@ import java.awt.*;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JButton;
-import java.io.File;
-import java.io.IOException;
 
 import javax.swing.JEditorPane;
 import javax.swing.text.PlainDocument;
-import javax.swing.text.html.HTMLDocument;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import javafx.geometry.Pos;
 import metier.EasyGec;
 
 import java.awt.event.MouseAdapter;
