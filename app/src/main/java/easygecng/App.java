@@ -3,6 +3,8 @@
  */
 package easygecng;
 
+import metier.SIReaderHandler;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
@@ -10,5 +12,14 @@ public class App {
 
     public static void main(String[] args) {
         System.out.println(new App().getGreeting());
+        
+        
+        System.out.println(System.getProperty("java.version"));
+        System.out.println( System.getProperty("java.library.path") );
+
+        SIReaderHandler siHandler = new SIReaderHandler(null);
+
+        siHandler.setPortName("COM5");
+        siHandler.start();
     }
 }

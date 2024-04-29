@@ -1,0 +1,3 @@
+[submodule "depend/GecoSI"]
+	path = depend/GecoSI
+	url = https://github.com/sdenier/GecoSI

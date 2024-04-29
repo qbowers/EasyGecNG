@@ -6,10 +6,25 @@
  * User Manual available at https://docs.gradle.org/8.0.2/userguide/building_java_projects.html
  */
 
+
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id 'java-library'
 }
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+}
+
+// App version. TODO: Pull this from git tag
+version = '1.0.0';
+
+// Set the encoding to allow french characters. TODO: use UTF-8
+compileJava.options.encoding = "windows-1252"
+compileTestJava.options.encoding = "windows-1252"
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -17,16 +32,34 @@ repositories {
 }
 
 dependencies {
-    // Use JUnit Jupiter for testing.
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+    // TODO: need to migrate GecoSI to JSerialComm?
+    implementation 'com.fazecast:jSerialComm:2.11.0'
+    // implementation 'rxtx:rxtx:2.+'
+    implementation 'org.rxtx:rxtx:2.+'
+    // implementation 'org.rxtx:rxtxcomm:2.0-7pre1'
+    // implementation 'org.rxtx:rxtxcomm-win32:1.0'
+    // implementation 'org.ogema.external:rxtx:2.2.1'
+    implementation 'jdom:jdom:1.+'
+    implementation 'junit:junit:4.13'
+    implementation 'org.mockito:mockito-core:1.9.+'
+}
 
-    // This dependency is used by the application.
-    implementation 'com.google.guava:guava:31.1-jre'
+
+
+// Add GecoSI as a source. TODO: Remove git submodule and use Gradle Source Dependencies (https://blog.gradle.org/introducing-source-dependencies)
+sourceSets {
+    main {
+        java {
+            srcDir '../depend/GecoSI/src'
+        }
+    }
 }
 
 application {
     // Define the main class for the application.
-    mainClass = 'easygecng.App'
+    mainClass = 'ihm.IhmEasyGec'
+    // mainClass = 'easygecng.App'
+    // applicationDefaultJvmArgs = ["-Djava.library.path=${rootDir}\\lib\\rxtx-2.1-7-bins-r2\\Windows\\i368-mingw32"]
 }
 
 tasks.named('test') {
