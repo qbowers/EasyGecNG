@@ -35,7 +35,7 @@ dependencies {
     // TODO: need to migrate GecoSI to JSerialComm?
     implementation 'com.fazecast:jSerialComm:2.11.0'
     // implementation 'rxtx:rxtx:2.+'
-    implementation 'org.rxtx:rxtx:2.+'
+    // implementation 'org.rxtx:rxtx:2.+'
     // implementation 'org.rxtx:rxtxcomm:2.0-7pre1'
     // implementation 'org.rxtx:rxtxcomm-win32:1.0'
     // implementation 'org.ogema.external:rxtx:2.2.1'
