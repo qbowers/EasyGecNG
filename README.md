@@ -69,7 +69,7 @@ TODO :)
 - stable releases (the archive bundle with runnable jar, doc, other files...) are built and tagged from time to time from main.
 - in the future, we'd like any push to the repository to trigger an automated build, which compile the code and runs tests. This would be implemented with something like GitHub Actions or Travis.
 
-### Manually greating a Release
+### Manually creating a Release
 We need to figure out how to do this. The bundle would ideally include:
 - help or doc folder with user documentation
 - a jar for development version (???)
