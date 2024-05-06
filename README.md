@@ -23,11 +23,13 @@ If you want to install a pre-built version of this software (i.e. you are not a 
 # Developer Installation Instructions
 ### 1. Install Dependencies
 You must have java8 installed.
-- `jdk8-openjdk8` on linux/mac
+- `jdk8-openjdk` on linux/mac. You must _not_ have a java version higher than v21.
 - download from [here](https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html) if on windows
 You must also have the [SportIdent Driver](https://www.sportident.com/products/96-software/161-usb-driver.html) installed, for older SI Hardware. The new stuff supports HID and should work out of the box.
 
-Linux: Add yourself to the correct dialout group. `sudo usermod -a -G dialout $USER` on debian-likes, `sudo usermod -a -G uucp $USER` on arch-likes.Log out, log in, check that the group appears when you type the `group` command.
+> Note: The BSF8 Stations work on linux with the [cp210x drivers](https://github.com/torvalds/linux/blob/master/drivers/usb/serial/cp210x.c), which have been in the kernel for at least 15 years. They should work on any linux device. See the support matrix HERE (TODO).
+
+Linux: Add yourself to the correct dialout group. `sudo usermod -a -G dialout $USER` on debian-likes, `sudo usermod -a -G uucp $USER` on arch-likes. Log out, log in, check that the `uucp/dialout` appears in the results of the `group` command.
 
 ### 2. Clone the repository
 `git clone git@github.com:qbowers/EasyGecNG.git`
@@ -77,7 +79,7 @@ We need to figure out how to do this. The bundle would ideally include:
 
 # Development Guidelines
 ### Good Practices
-- We should be using test-drive development, but we haven't figured out how to do that yet.
+- We should be using test-driven development, but we haven't figured out how to do that yet.
 - Documentation should be provided using javadoc comments on classes and methods.
 
 ### Dependencies
