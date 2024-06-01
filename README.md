@@ -23,9 +23,12 @@ If you want to install a pre-built version of this software (i.e. you are not a 
 # Developer Installation Instructions
 ### 1. Install Dependencies
 You must have java8 installed.
-- `jdk8-openjdk` on linux/mac. You must _not_ have a java version higher than v21.
-- download from [here](https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html) if on windows
-You must also have the [SportIdent Driver](https://www.sportident.com/products/96-software/161-usb-driver.html) installed, for older SI Hardware. The new stuff supports HID and should work out of the box.
+- download from [here](https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html) if on Windows
+- `jdk8-openjdk` on Linux/Mac
+You must also have the correct drivers installed.
+- [SportIdent Driver](https://www.sportident.com/products/96-software/161-usb-driver.html) on Windows
+- [CP210x](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers) on Mac
+- cp210x (builtin) on Linux
 
 > Note: The BSF8 Stations work on linux with the [cp210x drivers](https://github.com/torvalds/linux/blob/master/drivers/usb/serial/cp210x.c), which have been in the kernel for at least 15 years. They should work on any linux device. See the support matrix HERE (TODO).
 
