@@ -17,11 +17,12 @@ GecoSI is distributed under the MIT license; some parts are released by SPORTide
 # Normal Installation Instructions
 
 If you want to install a pre-built version of this software (i.e. you are not a developer), please visit the [release page](https://www.navigationgames.org/about-3), and download these dependencies:
-##### 1. Java 8
-  - Windows, Mac: Download and install Java [here](https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html).
+##### 1. JRE 8
+  - Windows, Mac: Download and install the latest Java SE Runtime Environment from [here](https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html).
   - Linux: install `jre8-openjdk` using your preferred package manager.
 ##### 2. Drivers
   - Windows: [SportIdent Driver](https://www.sportident.com/products/96-software/161-usb-driver.html)
+  - Mac: [CP210x Driver](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers)
   - Linux: Add yourself to the correct dialout group.
     - In a terminal (Ctrl+Alt+T), enter the command:
       - `sudo usermod -a -G dialout $USER` on debian-likes (Ubuntu, etc)
@@ -32,23 +33,22 @@ If you want to install a pre-built version of this software (i.e. you are not a 
 
 ### 1. Install Dependencies
 
-You must have java8 installed.
+##### 1. JDK 8
+  - Windows, Mac: Download and install the latest Java SE Development Kit from [here](https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html).
+  - Linux: install `jre8-openjdk` using your preferred package manager.
+##### 2. Drivers
+  - Windows: [SportIdent Driver](https://www.sportident.com/products/96-software/161-usb-driver.html)
+  - Mac: [CP210x Driver](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers)
+  - Linux: The drivers have been [in the linux kernel for a while now](https://github.com/torvalds/linux/blob/master/drivers/usb/serial/cp210x.c), but you do still need to add yourself to the correct dialout group.
+    - In a terminal (Ctrl+Alt+T), enter the command:
+      - `sudo usermod -a -G dialout $USER` on debian-likes (Ubuntu, etc)
+      - `sudo usermod -a -G uucp $USER` on arch-likes (Arch, Manjaro, etc)
+    - Log out, log in, check that the `uucp/dialout` appears in the results of the `group` command.
 
-- Windows, Mac: download and install from [here](https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html). 
-- Linux: install `jdk8-openjdk` using your preferred package manager.
-
-You must also have the correct drivers installed.
-
-- [SportIdent Driver](https://www.sportident.com/products/96-software/161-usb-driver.html) on Windows
-- [CP210x](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers) on Mac
-- cp210x (builtin) on Linux
-
-> Note: The BSF8 Stations work on linux with the [cp210x drivers](https://github.com/torvalds/linux/blob/master/drivers/usb/serial/cp210x.c), which have been in the kernel for at least 15 years. They should work on any linux device. See the support matrix HERE (TODO).
-
-Linux or Mac: Add yourself to the correct dialout group. `sudo usermod -a -G dialout $USER` on debian-likes, `sudo usermod -a -G uucp $USER` on arch-likes. Log out, log in, check that the `uucp/dialout` appears in the results of the `group` command.
 
 ### 2. Clone the repository
 `git clone git@github.com:qbowers/EasyGecNG.git`
+
 `cd EasyGecNG`
 
 ### 3. Test build
