@@ -10,9 +10,24 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
-    id 'java-library'
+    id 'java'
 }
 
+// Specify name of the EasyGecNG Jar to be built. TODO: rename app to avoid needing to do this
+jar {
+    archiveBaseName = 'EasyGecNG'
+}
+
+distributions {
+    main {
+        contents {
+            // TODO: move this into resources?
+            from 'src/main/lang.xml'
+        }
+    }
+}
+
+// Specify that we require Java8
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(8)
@@ -20,7 +35,7 @@ java {
 }
 
 // App version. TODO: Pull this from git tag
-version = '1.0.0';
+version = '1.0.1';
 
 // Set the encoding to allow french characters. TODO: use UTF-8
 compileJava.options.encoding = "windows-1252"
@@ -51,3 +66,5 @@ tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+
+
