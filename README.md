@@ -1,6 +1,6 @@
 # EasyGecNG
 
-EasyGecNG is a fork of [EasyGec](http://t.porret.free.fr/lienlogiciel.php?idmenu=60), which is in turn a fork of [Geco](http://sdenier.github.io/Geco/begin/index.html) ([source](https://github.com/sdenier/Geco)). It has been created for [Navigation Games](https://www.navigationgames.org/), a Boston-based non-profit focused on introducing the sport of orienteering to new audiences, especially school children. Geco was developed by Simon Denier, and EasyGec were developed by Thierry Porret. Thierry has kindly given us permission to use and modify his source code.
+EasyGecNG is a fork of [EasyGec](http://t.porret.free.fr/lienlogiciel.php?idmenu=60), which is in turn a fork of [Geco](http://sdenier.github.io/Geco/begin/index.html) ([source](https://github.com/sdenier/Geco)). It has been created for [Navigation Games](https://www.navigationgames.org/), a Boston-based non-profit focused on introducing the sport of orienteering to new audiences, especially school children. Geco was developed by Simon Denier, and EasyGec was developed by Thierry Porret. Thierry has kindly given us permission to use and modify his source code.
 
 
 Here is a link to a blog post on NavigationGames.org detailing goals for this project:
