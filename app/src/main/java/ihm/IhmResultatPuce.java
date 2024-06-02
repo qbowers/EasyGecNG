@@ -277,13 +277,11 @@ public class IhmResultatPuce extends JDialog
       String elapsedTime = TimeManager.fullTime(this.rp.arrivee-this.rp.depart);
       String courseName = rp.getCircuit().getNom();
 
-      //TODO:
-      //get if missed start or finish
       long start = rp.getStart();
       long finish = rp.getFinish();
-      //dev print
-      System.out.println("start: " + start);
-      System.out.println("finish: " + finish);
+      // //dev print
+      // System.out.println("start: " + start);
+      // System.out.println("finish: " + finish);
       //make a local variable to pass to IhmSmiley
       int okCourse = 0;
       if(start==-1) { //missed start control

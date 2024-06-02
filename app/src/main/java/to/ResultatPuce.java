@@ -608,10 +608,14 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
         }
         if(nbPostes == o.getNbPostes())
         {
-            if(tempsDeCourse >= o.getTempsDeCourse())
+            if(tempsDeCourse > o.getTempsDeCourse())
             {
                 return 1;
             }
+            if(tempsDeCourse == o.getTempsDeCourse()) {
+                return 0;
+            }
+
         }
         return -1;
     }
