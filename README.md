@@ -63,7 +63,7 @@ run `./gradlew tasks` to list available tasks, including running unit tests and 
 ## IDE integration
 
 ### VSCode
-Simply open the correct folder in the editor. Build/run/degub from terminal, or use the following extensions to get Gradle UI buttons:
+Simply open the correct folder in the editor. Build/run/debug from terminal, or use the following extensions to get Gradle UI buttons:
 - [Language Support for Java(TM) by Red Hat](https://open-vsx.org/extension/redhat/java)
 - [Gradle for Java](https://open-vsx.org/extension/vscjava/vscode-gradle)
 - If you're on the Microsoft-ified version of VSCode, try [this extension pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
