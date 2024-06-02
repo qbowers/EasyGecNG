@@ -285,9 +285,11 @@ public class IhmResultatPuce extends JDialog
       //make a local variable to pass to IhmSmiley
       int okCourse = 0;
       if(start==-1) { //missed start control
+        if(finish==-1) { //missed start and finish controls
+          okCourse = 3;
+        }
         okCourse = 1;
-      }
-      if(finish==-1) { //missed finish control
+      } else if(finish==-1) { //missed finish control
         okCourse = 2;
       }
 
