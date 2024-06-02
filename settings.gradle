@@ -12,7 +12,7 @@ include('app')
 
 // Reference to internal GecoSI code
 sourceControl {
-    gitRepository("https://github.com/qbowers/GecoSI") {
+    gitRepository("https://github.com/Navigation-Games/GecoSI") {
         producesModule("net.gecosi:lib")
     }
 }

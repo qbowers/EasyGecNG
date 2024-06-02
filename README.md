@@ -1,6 +1,6 @@
 # EasyGecNG
 
-EasyGecNG is a fork of [EasyGec](http://t.porret.free.fr/lienlogiciel.php?idmenu=60), which is in turn a fork of [Geco](http://sdenier.github.io/Geco/begin/index.html) ([source](https://github.com/sdenier/Geco)). It has been created for [Navigation Games](https://www.navigationgames.org/), a Boston-based non-profit focused on introducing the sport of orienteering to new audiences, especially school children. Geco and EasyGec were developed by Thierry Porret, and he has kindly given us permission to use and modify his source code.
+EasyGecNG is a fork of [EasyGec](http://t.porret.free.fr/lienlogiciel.php?idmenu=60), which is in turn a fork of [Geco](http://sdenier.github.io/Geco/begin/index.html) ([source](https://github.com/sdenier/Geco)). It has been created for [Navigation Games](https://www.navigationgames.org/), a Boston-based non-profit focused on introducing the sport of orienteering to new audiences, especially school children. Geco was developed by Simon Denier, and EasyGec were developed by Thierry Porret. Thierry has kindly given us permission to use and modify his source code.
 
 
 Here is a link to a blog post on NavigationGames.org detailing goals for this project:
@@ -9,7 +9,7 @@ https://www.navigationgames.org/post/in-the-works-new-software-for-teaching-orie
 
 
 <!-- TODO: figure out licensing oml -->
-Copyright (c) 2023 Thierry Porret and Navigation Games.
+Copyright (c) 2023 Thierry Porret, Simon Denier, and Navigation Games.
 
 GecoSI is distributed under the MIT license; some parts are released by SPORTident under the CC BY 3.0 license. 
 
@@ -27,7 +27,7 @@ If you want to install a pre-built version of this software (i.e. you are not a 
     - In a terminal (Ctrl+Alt+T), enter the command:
       - `sudo usermod -a -G dialout $USER` on debian-likes (Ubuntu, etc)
       - `sudo usermod -a -G uucp $USER` on arch-likes (Arch, Manjaro, etc)
-    - Log out, log in, check that the `uucp/dialout` appears in the results of the `group` command.
+    - Log out, log in, run the `group` command, and check that `uucp`/`dialout` appears in the results. 
 
 # Developer Installation Instructions
 
@@ -35,7 +35,7 @@ If you want to install a pre-built version of this software (i.e. you are not a 
 
 ##### 1. JDK 8
   - Windows, Mac: Download and install the latest Java SE Development Kit from [here](https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html).
-  - Linux: install `jre8-openjdk` using your preferred package manager.
+  - Linux: install `jdk8-openjdk` using your preferred package manager.
 ##### 2. Drivers
   - Windows: [SportIdent Driver](https://www.sportident.com/products/96-software/161-usb-driver.html)
   - Mac: [CP210x Driver](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers)
@@ -47,7 +47,7 @@ If you want to install a pre-built version of this software (i.e. you are not a 
 
 
 ### 2. Clone the repository
-`git clone git@github.com:qbowers/EasyGecNG.git`
+`git clone git@github.com:Navigation-Games/EasyGecNG.git`
 
 `cd EasyGecNG`
 
@@ -105,5 +105,5 @@ These are managed automatically by Gradle, but also enumerated here. TODO: Licen
 - jDom
 - jUnit4
 - Mockito-core
-- [GecoSI](https://github.com/qbowers/GecoSI)
+- [GecoSI](https://github.com/Navigation-Games/GecoSI)
   - jSerialComm
