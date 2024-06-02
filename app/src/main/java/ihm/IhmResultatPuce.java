@@ -287,8 +287,9 @@ public class IhmResultatPuce extends JDialog
       if(start==-1) { //missed start control
         if(finish==-1) { //missed start and finish controls
           okCourse = 3;
+        } else {
+          okCourse = 1;
         }
-        okCourse = 1;
       } else if(finish==-1) { //missed finish control
         okCourse = 2;
       }
