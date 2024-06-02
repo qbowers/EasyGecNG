@@ -599,21 +599,29 @@ public class ResultatPuce implements Cloneable, Comparable<ResultatPuce>
         this.classement = classement;
     }
 
+    /**
+     * Sorts by minimum nbPostes, then minimum tempsDeCourse, then by CSV string equality.
+     */
     @Override
     public int compareTo(ResultatPuce o)
     {
-        if(nbPostes < o.getNbPostes())
-        {
-            return 1;
-        }
-        if(nbPostes == o.getNbPostes())
-        {
-            if(tempsDeCourse >= o.getTempsDeCourse())
-            {
-                return 1;
-            }
-        }
-        return -1;
+        if(nbPostes != o.getNbPostes()) return (nbPostes < o.getNbPostes()) ? 1 : -1;
+        
+        if(tempsDeCourse != o.getTempsDeCourse()) return (tempsDeCourse > o.getTempsDeCourse()) ? 1 : -1;
+        
+        return (this.toCSV().compareTo(o.toCSV()));
+    }
+
+    /**
+     * @param o other object to compare
+     * @return true iff this and o output the same toCSV() string
+     */
+    public boolean equals(ResultatPuce o)
+    {
+        // quick disqualifiers
+        return nbPostes == o.getNbPostes() &&
+            tempsDeCourse == o.getTempsDeCourse() &&
+            this.toCSV().equals(o.toCSV());
     }
 
     /**

@@ -111,11 +111,15 @@ public class IhmSmiley extends JDialog
     //Set South label
     if(okCourse==1)
     { //missed start
-      lblTime.setText("Missed Start Control");
+      lblTime.setText("Missed Start Checkpoint");
     }
     else if(okCourse==2)
     { //missed finish
-      lblTime.setText("Missed Finish Control");
+      lblTime.setText("Missed Finish Checkpoint");
+    }
+    else if(okCourse==3)
+    { //missed start and finish
+      lblTime.setText("Missed Start and Finish Checkpoints");
     }
     else {
       if(temps.compareTo("0:00:00")!=0)
