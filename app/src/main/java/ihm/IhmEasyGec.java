@@ -1412,7 +1412,7 @@ public class IhmEasyGec extends JFrame
   
   private boolean existeRepertoire()
   {
-    if(easyGec.getFichier().compareTo("") != 0)
+    if(!easyGec.getFichier().equals(""))
     {
       File dossier = new File(Outils.getRepertoire(easyGec.getFichier()));
       return dossier.exists();
@@ -1510,12 +1510,22 @@ public class IhmEasyGec extends JFrame
   
   private void Enregistrer()
   {
-    int retour = JOptionPane.showConfirmDialog(IhmEasyGec.this, EasyGec.getLangages().getText("45", EasyGec.getLang()),
-        EasyGec.getLangages().getText("46", EasyGec.getLang()), JOptionPane.ERROR_MESSAGE, JOptionPane.YES_NO_CANCEL_OPTION);
-    if(retour == 0)
-    {
-      btnEnregistrer.doClick();
+    // Do not save empty event
+    if (existeRepertoire()) {
+      int retour = JOptionPane.showConfirmDialog(IhmEasyGec.this, EasyGec.getLangages().getText("45", EasyGec.getLang()),
+      EasyGec.getLangages().getText("46", EasyGec.getLang()), JOptionPane.ERROR_MESSAGE, JOptionPane.YES_NO_CANCEL_OPTION);
+      if(retour == 0) {
+        btnEnregistrer.doClick();
+      }
     }
+
+    // // prev
+    // int retour = JOptionPane.showConfirmDialog(IhmEasyGec.this, EasyGec.getLangages().getText("45", EasyGec.getLang()),
+    //   EasyGec.getLangages().getText("46", EasyGec.getLang()), JOptionPane.ERROR_MESSAGE, JOptionPane.YES_NO_CANCEL_OPTION);
+    // if(retour == 0)
+    // {
+    //   btnEnregistrer.doClick();
+    // }
   }
   
   private void changeLanguage()
